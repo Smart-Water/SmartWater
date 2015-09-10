@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel>
+<schema name="public" protected="true" rect-visible="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<database name="TCC" encoding="UTF8" lc-collate="Portuguese_Brazil" lc-ctype="Portuguese_Brazil">
+	<role name="postgres"/>
+	<tablespace name="pg_default"/>
+</database>
+
+<table name="niveis_acesso">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="50" y="50"/>
+	<column name="id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="descricao" not-null="true">
+		<type name="character varying" length="150"/>
+	</column>
+	<constraint name="na_pk" type="pk-constr" factor="100" table="public.niveis_acesso">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="users">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="494" y="46"/>
+	<column name="cpf" not-null="true">
+		<type name="bigint"/>
+	</column>
+	<column name="nome" not-null="true">
+		<type name="character varying" length="300"/>
+	</column>
+	<column name="endereco" not-null="true">
+		<type name="character varying" length="500"/>
+	</column>
+	<column name="cidade" not-null="true">
+		<type name="character varying" length="200"/>
+	</column>
+	<column name="estado" not-null="true">
+		<type name="character varying" length="2"/>
+	</column>
+	<column name="pais" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="login" not-null="true">
+		<type name="character varying" length="500"/>
+	</column>
+	<column name="password" not-null="true">
+		<type name="character varying" length="500"/>
+	</column>
+	<column name="email" not-null="true">
+		<type name="character varying" length="200"/>
+	</column>
+	<column name="qtd_moradores" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="nivel_acesso" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="users_pk" type="pk-constr" factor="100" table="public.users">
+		<columns names="cpf" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="boards">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="370" y="400"/>
+	<column name="mac_address" not-null="true">
+		<type name="character varying" length="12"/>
+	</column>
+	<column name="cpf_user" not-null="true">
+		<type name="bigint"/>
+	</column>
+	<constraint name="boards_pk" type="pk-constr" factor="100" table="public.boards">
+		<columns names="mac_address" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="history_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="9223372036854775807"
+	 cache="1" cycle="false">
+	<schema name="public"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="history">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="801" y="384"/>
+	<column name="id" not-null="true" default-value="nextval('history_id_seq'::regclass)">
+		<type name="integer"/>
+	</column>
+	<column name="mac_address" not-null="true">
+		<type name="character varying" length="12"/>
+	</column>
+	<column name="time_register" not-null="true">
+		<type name="timestamp"/>
+	</column>
+	<column name="water_flow" not-null="true">
+		<type name="double precision"/>
+	</column>
+	<constraint name="history_pk" type="pk-constr" factor="100" table="public.history">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="na_fk" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.niveis_acesso" table="public.users">
+	<columns names="nivel_acesso" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
+<constraint name="user_fk" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.users" table="public.boards">
+	<columns names="cpf_user" ref-type="src-columns"/>
+	<columns names="cpf" ref-type="dst-columns"/>
+</constraint>
+<constraint name="board_fk" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.boards" table="public.history">
+	<columns names="mac_address" ref-type="src-columns"/>
+	<columns names="mac_address" ref-type="dst-columns"/>
+</constraint>
+<relationship name="rel_users_niveis_acesso" type="relfk"
+	 src-table="public.users"
+	 dst-table="public.niveis_acesso"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_boards_users" type="relfk"
+	 src-table="public.boards"
+	 dst-table="public.users"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="rel_history_boards" type="relfk"
+	 src-table="public.history"
+	 dst-table="public.boards"
+	 src-required="true" dst-required="true"/>
+
+</dbmodel>
