@@ -10,7 +10,7 @@ MQTT_TOPIC = 'UNIVAS_TCC_2015/+/waterFlow'
 DB_HOST = 'localhost'
 DB_USER = 'postgres'
 DB_PASSWORD = 'database'
-DB_NAME = 'TCC'
+DB_NAME = 'smartWater'
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, rc):
