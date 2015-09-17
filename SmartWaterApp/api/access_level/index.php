@@ -5,30 +5,31 @@ require_once '../connection.php';
 $app = new \Slim\Slim();
 
 $app->get('/', function ()  {
-  $sql = "SELECT * FROM boards";
+  $sql = "SELECT * FROM access_level";
   try {
     $conn = new Connection();
     $db = $conn->getConnection();
     $stmt = $db->query($sql);
-    $boards = $stmt->fetchAll(PDO::FETCH_OBJ);
+    $access_levels = $stmt->fetchAll(PDO::FETCH_OBJ);
     $db = null;
-    echo json_encode($boards);
+    echo json_encode($access_levels);
   } catch(PDOException $e) {
-  echo '{"error":{"text":'. $e->getMessage() .'}}';
+    echo '{"error":{"text":'. $e->getMessage() .'}}';
   }
 });
 
-$app->get('/:mac_address', function ($mac_address)  {
-  $sql = "SELECT * FROM boards WHERE mac_address=:mac_address";
+$app->get('/:id', function ($id)  {
+  $sql = "SELECT * FROM access_level WHERE id=:id";
   try {
     $conn = new Connection();
     $db = $conn->getConnection();
+
     $stmt = $db->prepare($sql);
-    $stmt->bindParam("mac_address", $mac_address);
+    $stmt->bindParam("id", $id);
     $stmt->execute();
-    $board = $stmt->fetchObject();
+    $access_level = $stmt->fetchObject();
     $db = null;
-    echo json_encode($board);
+    echo json_encode($access_level);
   } catch(PDOException $e) {
     echo '{"error":{"text":'. $e->getMessage() .'}}';
   }
@@ -37,53 +38,53 @@ $app->get('/:mac_address', function ($mac_address)  {
 $app->post('/', function () {
   $request = \Slim\Slim::getInstance()->request();
   $body = $request->getBody();
-  $board = json_decode($body);
-  $sql = "INSERT INTO boards (mac_address,cpf_user) VALUES (:mac_address,:cpf_user)";
+  $access_level = json_decode($body);
+
+  $sql = "INSERT INTO access_level(description) VALUES (:description)";
   try {
     $conn = new Connection();
     $db = $conn->getConnection();
-
     $stmt = $db->prepare($sql);
-    $stmt->bindParam("mac_address", $board->mac_address);
-    $stmt->bindParam("cpf_user", $board->cpf_user);
+    $stmt->bindParam("description", $access_level->description);
     $stmt->execute();
+    $access_level->id = $db->lastInsertId("access_level_id_seq");
     $db = null;
-    echo json_encode($board);
+    echo json_encode($access_level);
   } catch(PDOException $e) {
     echo '{"error":{"text":'. $e->getMessage() .'}}';
   }
 });
 
-$app->put('/:mac_address', function ($mac_address) {
+$app->put('/:id', function ($id) {
   $request = \Slim\Slim::getInstance()->request();
   $body = $request->getBody();
-  $board = json_decode($body);
-  $board->mac_address = $mac_address;
+  $access_level = json_decode($body);
+  $access_level->id = $id;
 
-  $sql = "UPDATE boards SET cpf_user=:cpf_user WHERE mac_address=:mac_address";
+  $sql = "UPDATE access_level SET description=:description WHERE id=:id";
   try {
     $conn = new Connection();
     $db = $conn->getConnection();
 
     $stmt = $db->prepare($sql);
-    $stmt->bindParam("mac_address", $board->mac_address);
-    $stmt->bindParam("cpf_user", $board->cpf_user);
+    $stmt->bindParam("id", $access_level->id);
+    $stmt->bindParam("description", $access_level->description);
     $stmt->execute();
     $db = null;
-    echo json_encode($board);
+    echo json_encode($access_level);
   } catch(PDOException $e) {
     echo '{"error":{"text":'. $e->getMessage() .'}}';
   }
 });
 
-$app->delete('/:mac_address', function($mac_address) {
-  $sql = "DELETE FROM boards WHERE mac_address=:mac_address";
+$app->delete('/:id', function($id) {
+  $sql = "DELETE FROM access_level WHERE id=:id";
   try {
     $conn = new Connection();
     $db = $conn->getConnection();
 
     $stmt = $db->prepare($sql);
-    $stmt->bindParam("mac_address", $mac_address);
+    $stmt->bindParam("id", $id);
     $stmt->execute();
     $db = null;
   } catch(PDOException $e) {
