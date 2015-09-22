@@ -338,6 +338,7 @@ th {
 }
 .glyphicon-remove:before {
   content: "\e014";
+  color: #DD4B39;
 }
 .glyphicon-zoom-in:before {
   content: "\e015";
@@ -362,6 +363,7 @@ th {
 }
 .glyphicon-file:before {
   content: "\e022";
+  color: #2E80BB;
 }
 .glyphicon-time:before {
   content: "\e023";
@@ -488,6 +490,7 @@ th {
 }
 .glyphicon-edit:before {
   content: "\e065";
+  color: #BECD37;
 }
 .glyphicon-share:before {
   content: "\e066";

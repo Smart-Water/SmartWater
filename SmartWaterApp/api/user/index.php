@@ -5,7 +5,7 @@ require_once '../connection.php';
 $app = new \Slim\Slim();
 
 $app->get('/', function ()  {
-  $sql = "SELECT * FROM users";
+  $sql = "SELECT * FROM users order by name";
   try {
     $conn = new Connection();
     $db = $conn->getConnection();
