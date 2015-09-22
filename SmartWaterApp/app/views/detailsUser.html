@@ -1,0 +1,38 @@
+<h2>{{pageTitle}}</h2>
+<div class="panel panel-default">
+  <div class="panel-heading">Details</div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>User Name</th>
+        <th>CPF</th>
+        <th>Email</th>
+        <th>Adress</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Country</th>
+        <th>Residente Numbers</th>
+        <th>Access Level</th>
+        <th>Reports</th>
+        <th>Edit</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-model="user">
+        <td>{{user.name}}</td>
+        <td>{{user.cpf}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.address}}</td>
+        <td>{{user.city}}</td>
+        <td>{{user.state_city}}</td>
+        <td>{{user.country}}</td>
+        <td>{{user.residente_numbers}}</td>
+        <td>{{user.access_level}}</td>
+        <td><a href=""><span class="glyphicon glyphicon-file" aria-hidden="true"></span></a></td>
+        <td><a href=""><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+        <td><a href="listUser/{{user.cpf}}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
