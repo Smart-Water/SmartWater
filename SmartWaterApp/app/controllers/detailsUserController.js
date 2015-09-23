@@ -24,7 +24,6 @@ function findUserDetails($scope,$http,$routeParams) {
 
   $http.get('api/user/'+$routeParams.cpf).success(function(data) {
     $scope.user = data;
-
   });
 
 };

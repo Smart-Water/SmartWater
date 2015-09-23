@@ -33,11 +33,10 @@ $app->get('/users/', function ()  {
 });
 
 $app->get('/:cpf', function ($cpf)  {
-  $sql = "SELECT * FROM users WHERE cpf=:cpf";
+  $sql = "SELECT * FROM users, boards where users.cpf=:cpf and boards.cpf_user =:cpf";
   try {
     $conn = new Connection();
     $db = $conn->getConnection();
-
     $stmt = $db->prepare($sql);
     $stmt->bindParam("cpf", $cpf);
     $stmt->execute();
