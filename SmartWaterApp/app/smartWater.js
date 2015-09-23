@@ -2,8 +2,9 @@ var app = angular.module('smartWater',['ngRoute', 'ngMessages','ui.mask']);
 
 app.config(function($routeProvider, $locationProvider)
 {
+
    // remove o # da url
-   $locationProvider.html5Mode(true);
+  // $locationProvider.html5Mode(true);
 
    $routeProvider
 
@@ -18,6 +19,22 @@ app.config(function($routeProvider, $locationProvider)
       controller     : 'addUserCtrl',
    })
 
+   .when('/listUser', {
+     templateUrl : 'app/views/listUser.html',
+     controller  : 'UserListCtrl',
+   })
+
+   .when('/listUser/:cpf', {
+     templateUrl : 'app/views/listUser.html',
+     controller  : 'UserListCtrl',
+   })
+
+   .when('/detailsUser/:cpf', {
+     templateUrl : 'app/views/detailsUser.html',
+     controller  : 'DetailsUserCtrl',
+   })
+
    // caso não seja nenhum desses, redirecione para a rota '/'
    .otherwise ({ redirectTo: '/' });
+
 });

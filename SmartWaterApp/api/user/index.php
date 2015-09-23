@@ -18,6 +18,20 @@ $app->get('/', function ()  {
   }
 });
 
+$app->get('/users/', function ()  {
+  $sql = "SELECT * FROM users where access_level = 2";
+  try {
+    $conn = new Connection();
+    $db = $conn->getConnection();
+    $stmt = $db->query($sql);
+    $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+    $db = null;
+    echo json_encode($users);
+  } catch(PDOException $e) {
+    echo '{"error":{"text":'. $e->getMessage() .'}}';
+  }
+});
+
 $app->get('/:cpf', function ($cpf)  {
   $sql = "SELECT * FROM users WHERE cpf=:cpf";
   try {

@@ -1,0 +1,57 @@
+<h2>{{pageTitle}}</h2>
+<div class="panel panel-default">
+  <div class="panel-heading">Details</div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>User Name</th>
+        <th>CPF</th>
+        <th>Email</th>
+        <th>Adress</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Country</th>
+        <th>Number of Residents</th>
+        <th>Reports</th>
+        <th>Edit</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-model="user">
+        <td>{{user.name}}</td>
+        <td>{{user.cpf}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.address}}</td>
+        <td>{{user.city}}</td>
+        <td>{{user.state_city}}</td>
+        <td>{{user.country}}</td>
+        <td>{{user.residente_numbers}}</td>
+        <td><a href=""><span class="glyphicon glyphicon-file" aria-hidden="true"></span></a></td>
+        <td><a href=""><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+        <td><a href="" ng-click="confirmDelete(user)">
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal Remove -->
+<div class="modal fade" id="modalRemove" tabindex="-1" role="dialog" aria-labelledby="modalRemoveLabel" aria-hidden="true"
+visible="showModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="modalRemoveLabel">Remove User</h4>
+      </div>
+      <div class="modal-body">
+        Are you sure want to remove this user?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" ng-click="deleteUser(userToDelete)">Confirm</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
