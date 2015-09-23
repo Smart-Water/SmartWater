@@ -53,8 +53,8 @@ $app->post('/', function () {
   $request = \Slim\Slim::getInstance()->request();
   $body = $request->getBody();
   $user = json_decode($body);
-  $sql = "INSERT INTO users (cpf,name,address,city,state_city,country,password,email,residente_numbers,access_level)
-          VALUES (:cpf,:name,:address,:city,:state_city,:country,:password,:email,:residente_numbers,:access_level)";
+  $sql = "INSERT INTO users (cpf,name,address,city,state_city,country,password,email,residents_number,access_level)
+          VALUES (:cpf,:name,:address,:city,:state_city,:country,:password,:email,:residents_number,:access_level)";
   try {
     $conn = new Connection();
     $db = $conn->getConnection();
@@ -68,7 +68,7 @@ $app->post('/', function () {
     $stmt->bindParam("country", $user->country);
     $stmt->bindParam("password", $user->password);
     $stmt->bindParam("email", $user->email);
-    $stmt->bindParam("residente_numbers", $user->residente_numbers);
+    $stmt->bindParam("residents_number", $user->residents_number);
     $stmt->bindParam("access_level", $user->access_level);
     $stmt->execute();
     $db = null;
@@ -85,7 +85,7 @@ $app->put('/:cpf', function ($cpf) {
   $user->cpf = $cpf;
 
   $sql = "UPDATE users SET name=:name, address=:address, city=:city, state_city=:state_city,
-          country=:country, password=:password, email=:email, residente_numbers=:residente_numbers,
+          country=:country, password=:password, email=:email, residents_number=:residents_number,
           access_level=:access_level WHERE cpf=:cpf";
   try {
     $conn = new Connection();
@@ -100,7 +100,7 @@ $app->put('/:cpf', function ($cpf) {
     $stmt->bindParam("country", $user->country);
     $stmt->bindParam("password", $user->password);
     $stmt->bindParam("email", $user->email);
-    $stmt->bindParam("residente_numbers", $user->residente_numbers);
+    $stmt->bindParam("residents_number", $user->residents_number);
     $stmt->bindParam("access_level", $user->access_level);
     $stmt->execute();
     $db = null;

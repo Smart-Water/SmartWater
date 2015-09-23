@@ -11,9 +11,10 @@ CREATE TABLE users(
 	city varchar(200) not null,
 	state_city varchar(2) not null,
 	country varchar(100) not null,
+	zip_code bigint,
 	password varchar(500) not null,
 	email varchar(200) not null,
-	residente_numbers int not null,
+	residents_number int,
 	access_level int not null,
 	constraint users_pk primary key(cpf),
 	constraint al_fk foreign key(access_level)
