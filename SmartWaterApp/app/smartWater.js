@@ -1,4 +1,4 @@
-var app = angular.module('smartWater',['ngRoute']);
+var app = angular.module('smartWater',['ngRoute', 'ngMessages','ui.mask']);
 
 app.config(function($routeProvider, $locationProvider)
 {
@@ -14,8 +14,8 @@ app.config(function($routeProvider, $locationProvider)
    })
 
    .when('/addUser', {
-      templateUrl : 'app/views/addUser.html',
-      controller     : 'UserCtrl',
+      templateUrl : 'app/views/user.html',
+      controller     : 'addUserCtrl',
    })
 
    // caso não seja nenhum desses, redirecione para a rota '/'

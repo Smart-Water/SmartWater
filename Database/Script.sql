@@ -1,4 +1,4 @@
-﻿CREATE TABLE access_level(
+CREATE TABLE access_level(
 	id serial not null,
 	description varchar(150) not null,
 	constraint na_pk primary key(id)
@@ -38,5 +38,5 @@ CREATE TABLE history(
 		references boards(mac_address)
 );
 
-INSERT INTO access_level(description) VALUES ('administrator');
-INSERT INTO access_level(description) VALUES ('user');
+INSERT INTO access_level(description) VALUES ('Administrator');
+INSERT INTO access_level(description) VALUES ('User');
