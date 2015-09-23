@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="smartWater">
 <head>
-	<base href="/SmartWater/SmartWaterApp/"></base>
+	<!--<base href="/SmartWater/SmartWaterApp/"></base> !-->
 
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -49,16 +49,43 @@
 					<div class="navbar-collapse collapse">
 						<ul class="nav navbar-nav navbar-right dashboard">
 							<li class="dropdown">
-								<a id="dashboard-btn" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">Dashboard <b class="caret"></b></a>
+								<a id="dashboard-btn" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+									<i class="glyphicon glyphicon-dashboard" aria-hidden="true"></i>Dashboard <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="dashboard-btn">
 									<li role="presentation">
-										<a role="menuitem" tabindex="-1" href="">Item1</a>
+										<a role="menuitem" tabindex="-1" a href="#/listUser" ng-class="{active: activetab == '/listUser'}">
+											<i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>All users</a>
+									</li>
+									<li role="presentation">
+										<a role="menuitem" tabindex="-1" href="#/addUser" ng-class="{active: activetab == '/addUser'}">
+											<i class="glyphicon glyphicon-plus" aria-hidden="true"></i>Add new</a>
+									</li>
+									<li role="presentation">
+										<a role="menuitem" tabindex="-1" href="">Report 1</a>
+									</li>
+									<li role="presentation">
+										<a role="menuitem" tabindex="-1" href="">Report 2</a>
+									</li>
+									<li role="presentation">
+										<a role="menuitem" tabindex="-1" href="">Report 3</a>
 									</li>
 								</ul>
 							</li>
-							<li><a href="" class="changePassword">Change Password</a></li>
-							<li><a href="">Help</a></li>
-							<li><a href="">Logout</a></li>
+							<li><a href="" class="changePassword">
+										<i class="glyphicon glyphicon-refresh" aria-hidden="true"></i>
+										Change Password
+									</a>
+							</li>
+							<li><a href="">
+										<i class="glyphicon glyphicon-book" aria-hidden="true"></i>
+										About
+									</a>
+							</li>
+							<li><a href="" onclick="return confirm('Are you sure?')">
+										<i class="glyphicon glyphicon-log-out" aria-hidden="true"></i>
+										Logout
+									</a>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -70,7 +97,7 @@
 					<div class="col-sm-3 col-md-2 sidebar" id="sidebar">
 						<ul class="nav nav-sidebar">
 							<li class="item-sidebar active" ng-class="{active: activetab == '/'}">
-								<a href="dashboard">
+								<a href="#/">
 									<i class="glyphicon glyphicon-dashboard" aria-hidden="true"></i>
 									Dashboard
 								</a>
@@ -85,13 +112,13 @@
 							</li>
 							<ul class="nav sub-menu collapse" id="sub-menu-users">
 								<li ng-class="{active: activetab == '/listUser'}">
-										<a href="listUser">
+										<a href="#/listUser">
 											<i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
 											All users
 										</a>
 								</li>
 								<li ng-class="{active: activetab == '/addUser'}">
-									<a href="addUser">
+									<a href="#/addUser">
 										<i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
 										Add new
 									</a>
