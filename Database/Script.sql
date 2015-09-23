@@ -1,7 +1,7 @@
 CREATE TABLE access_level(
 	id serial not null,
 	description varchar(150) not null,
-	constraint na_pk primary key(id)
+	constraint al_pk primary key(id)
 );
 
 CREATE TABLE users(
@@ -14,7 +14,7 @@ CREATE TABLE users(
 	zip_code bigint,
 	password varchar(500) not null,
 	email varchar(200) not null,
-	residents_number int,
+	number_of_residents int,
 	access_level int not null,
 	constraint users_pk primary key(cpf),
 	constraint al_fk foreign key(access_level)

@@ -28,13 +28,3 @@ function findAllUsers($scope,$http) {
   });
 
 };
-
-function deleteUser($scope,$http,user) {
-
-  $http.delete('api/user/'+$routeParams.cpf).success(function(data) {
-    $http.get('api/user/').success(function(data) {
-      $scope.users = data;
-    });
-
-  });
-};

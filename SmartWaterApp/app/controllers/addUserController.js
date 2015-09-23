@@ -19,18 +19,18 @@
     $scope.add_new = function(user, board, formUser) {
       tempString  = user.cpf;
       user.cpf = tempString.replace(".","").replace("-","");
-      console.log(user);
+      //console.log(user);
 
       $http.post('api/user/', user).success(function(){
         if(user.access_level == 2){
           board.cpf_user = user.cpf;
           $http.post('api/board/', board).success(function(){
             $scope.reset();
-            $scope.activePath = $location.path('/listUser');
+            $scope.activePath = $location.path('listUser');
           });
         }else{
           $scope.reset();
-          $scope.activePath = $location.path('/listUser');
+          $scope.activePath = $location.path('listUser');
         }
       });
       $scope.reset = function() {

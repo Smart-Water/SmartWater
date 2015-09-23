@@ -1,8 +1,108 @@
+/* Global Styles */
+
+/* ------------------------------- */
+
 body {
-  background-color: #033649;
+  background-color: #f8f8f8;
+  padding-top: 100px;
+  background: #f8f8f8 url('../images/logo_smartwater.png') no-repeat;
+  background-size: 55%;
+  padding: 100px;
+  background-position: center;
 }
 
-#footer {
-  color: #FFFFFF;
-  text-align: center;
+@media(min-width:768px) {
+  body {
+    padding-top: 50px;
+  }
 }
+
+/* Wrappers */
+
+/* ------------------------------- */
+
+#wrapper {
+  width: 100%;
+}
+
+#page-wrapper {
+  padding: 0 15px;
+  min-height: 568px;
+  background-color: #fff;
+}
+
+@media(min-width:768px) {
+  #page-wrapper {
+    position: inherit;
+    margin: 0 0 0 250px;
+    padding: 0 30px;
+    min-height: 1300px;
+    border-left: 1px solid #e7e7e7;
+  }
+}
+
+@media(min-width:768px) {
+  .navbar-static-side {
+    z-index: 1;
+    position: absolute;
+    width: 250px;
+    margin-top: 51px;
+  }
+
+  /* Buttons */
+
+  /* ------------------------------- */
+
+  .btn-outline {
+    color: inherit;
+    background-color: transparent;
+    transition: all .5s;
+  }
+
+  .btn-primary.btn-outline {
+    color: #428bca;
+  }
+
+  .btn-success.btn-outline {
+    color: #5cb85c;
+  }
+
+  .btn-info.btn-outline {
+    color: #5bc0de;
+  }
+
+  .btn-warning.btn-outline {
+    color: #f0ad4e;
+  }
+
+  .btn-danger.btn-outline {
+    color: #d9534f;
+  }
+
+  .btn-primary.btn-outline:hover,
+  .btn-success.btn-outline:hover,
+  .btn-info.btn-outline:hover,
+  .btn-warning.btn-outline:hover,
+  .btn-danger.btn-outline:hover {
+    color: #fff;
+  }
+
+  /* Login Page */
+
+  .login-panel {
+    margin-top: 30%;
+  }
+
+  .container {
+    opacity:0.90;
+    -moz-opacity: 0.90;
+    filter: alpha(opacity=90);
+  }
+
+  footer {
+    position: absolute;
+    bottom: 0;
+    padding: 20px;
+    left: 45%;
+    font-size: 16px;
+  }
