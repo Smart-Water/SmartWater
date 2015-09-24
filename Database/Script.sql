@@ -11,7 +11,7 @@ CREATE TABLE users(
 	city varchar(200) not null,
 	state_city varchar(2) not null,
 	country varchar(100) not null,
-	zip_code bigint,
+	zip_code bigint not null,
 	password varchar(500) not null,
 	email varchar(200) not null,
 	number_of_residents int,

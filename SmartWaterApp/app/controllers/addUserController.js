@@ -17,26 +17,27 @@
     $scope.master = {};
     $scope.activePath = null;
     $scope.add_new = function(user, board, formUser) {
-      tempString  = user.cpf;
-      user.cpf = tempString.replace(".","").replace("-","");
-      //console.log(user);
-
-      $http.post('api/user/', user).success(function(){
-        if(user.access_level == 2){
-          board.cpf_user = user.cpf;
+      tempString = user.zip_code;
+      user.zip_code = tempString.replace("-","").replace("/","").replace(".","");
+      if(user.access_level==2){
+        board.cpf_user = user.cpf;
+        $http.post('api/user/', user).success(function(){
           $http.post('api/board/', board).success(function(){
             $scope.reset();
             $scope.activePath = $location.path('listUser');
           });
-        }else{
+        });
+      }else{
+        $http.post('api/user/', user).success(function(){
           $scope.reset();
           $scope.activePath = $location.path('listUser');
-        }
-      });
-      $scope.reset = function() {
-        $scope.user = angular.copy($scope.master);
-        $scope.board = angular.copy($scope.master);
-      };
-      $scope.reset();
+        });
+      }
     };
-  }
+
+    $scope.reset = function() {
+      $scope.user = angular.copy($scope.master);
+      $scope.board = angular.copy($scope.master);
+    };
+    $scope.reset();
+  };

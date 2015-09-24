@@ -53,8 +53,8 @@ $app->post('/', function () {
   $request = \Slim\Slim::getInstance()->request();
   $body = $request->getBody();
   $user = json_decode($body);
-  $sql = "INSERT INTO users (cpf,name,address,city,state_city,country,password,email,number_of_residents,access_level)
-          VALUES (:cpf,:name,:address,:city,:state_city,:country,:password,:email,:number_of_residents,:access_level)";
+  $sql = "INSERT INTO users (cpf,name,address,city,state_city,country,zip_code,password,email,number_of_residents,access_level)
+          VALUES (:cpf,:name,:address,:city,:state_city,:country,:zip_code,:password,:email,:number_of_residents,:access_level)";
   try {
     $conn = new Connection();
     $db = $conn->getConnection();
@@ -66,6 +66,7 @@ $app->post('/', function () {
     $stmt->bindParam("city", $user->city);
     $stmt->bindParam("state_city", $user->state_city);
     $stmt->bindParam("country", $user->country);
+    $stmt->bindParam("zip_code", $user->zip_code);
     $stmt->bindParam("password", $user->password);
     $stmt->bindParam("email", $user->email);
     $stmt->bindParam("number_of_residents", $user->number_of_residents);
