@@ -18,7 +18,7 @@ CREATE TABLE users(
 	access_level int not null,
 	constraint users_pk primary key(cpf),
 	constraint al_fk foreign key(access_level)
-		references access_level(id)
+		references access_level(id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE boards(
@@ -26,7 +26,7 @@ CREATE TABLE boards(
 	cpf_user bigint not null,
 	constraint boards_pk primary key(mac_address),
 	constraint users_fk foreign key (cpf_user)
-		references users(cpf)
+		references users(cpf) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE history(
@@ -36,8 +36,13 @@ CREATE TABLE history(
 	water_flow double precision not null,
 	constraint history_pk primary key(id),
 	constraint board_fk foreign key (mac_address)
-		references boards(mac_address)
+		references boards(mac_address) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 INSERT INTO access_level(description) VALUES ('Administrator');
 INSERT INTO access_level(description) VALUES ('User');
+
+INSERT INTO USERS (cpf, name, address, city, state_city, country, zip_code,
+password, email, number_of_residents, access_level) VALUES
+('09678577699','Admin','Rua Francisco Sales','Pouso Alegre','MG','Brasil',
+37550000,'master','admin@admin.com',0,1);

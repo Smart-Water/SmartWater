@@ -34,6 +34,22 @@ $app->get('/:mac_address', function ($mac_address)  {
   }
 });
 
+$app->get('/user/:cpf', function ($cpf)  {
+  $sql = "SELECT * FROM boards WHERE cpf_user=:cpf";
+  try {
+    $conn = new Connection();
+    $db = $conn->getConnection();
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam("cpf", $cpf);
+    $stmt->execute();
+    $board = $stmt->fetchObject();
+    $db = null;
+    echo json_encode($board);
+  } catch(PDOException $e) {
+    echo '{"error":{"text":'. $e->getMessage() .'}}';
+  }
+});
+
 $app->post('/', function () {
   $request = \Slim\Slim::getInstance()->request();
   $body = $request->getBody();

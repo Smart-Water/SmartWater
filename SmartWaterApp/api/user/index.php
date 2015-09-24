@@ -33,7 +33,8 @@ $app->get('/users/', function ()  {
 });
 
 $app->get('/:cpf', function ($cpf)  {
-  $sql = "SELECT * FROM users, boards where users.cpf=:cpf and boards.cpf_user =:cpf";
+  //$sql = "SELECT * FROM users, boards where users.cpf=:cpf and boards.cpf_user =:cpf";
+  $sql = "SELECT * FROM users where cpf=:cpf";
   try {
     $conn = new Connection();
     $db = $conn->getConnection();

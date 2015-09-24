@@ -26,4 +26,8 @@ function findUserDetails($scope,$http,$routeParams) {
     $scope.user = data;
   });
 
+  $http.get('api/board/user/'+$routeParams.cpf).success(function(data) {
+    $scope.user.mac_address = data.mac_address;
+  });
+
 };
