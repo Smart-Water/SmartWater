@@ -2,6 +2,8 @@
 require '../vendor/autoload.php';
 require_once '../connection.php';
 
+session_start();
+
 $app = new \Slim\Slim();
 
 $app->get('/', function ()  {
@@ -59,6 +61,13 @@ $app->get('/:cpf/:password', function ($cpf,$password)  {
     $stmt->execute();
     $user = $stmt->fetchObject();
     $db = null;
+    if($user != null) {
+      $_SESSION['login_session'] = $cpf;
+      $_SESSION['password_session'] = $password;
+    } else {
+      unset($_SESSION['login_session']);
+      unset($_SESSION['password_session']);
+    }
     echo json_encode($user);
   } catch(PDOException $e) {
     echo '{"error":{"text":'. $e->getMessage() .'}}';

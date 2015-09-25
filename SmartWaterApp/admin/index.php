@@ -1,3 +1,6 @@
+<?php
+     include ("../session/session.php");
+?>
 <!DOCTYPE html>
 <html ng-app="smartWater">
    <head>
