@@ -8,7 +8,7 @@
   });
 
   function ListAccessLevels($scope, $http) {
-    $http.get('api/access_level/').success(function(data) {
+    $http.get('../api/access_level/').success(function(data) {
       $scope.access_levels = data;
     });
   }
@@ -21,14 +21,14 @@
       user.zip_code = tempString.replace("-","").replace("/","").replace(".","");
       if(user.access_level==2){
         board.cpf_user = user.cpf;
-        $http.post('api/user/', user).success(function(){
-          $http.post('api/board/', board).success(function(){
+        $http.post('../api/user/', user).success(function(){
+          $http.post('../api/board/', board).success(function(){
             $scope.reset();
             $scope.activePath = $location.path('listUser');
           });
         });
       }else{
-        $http.post('api/user/', user).success(function(){
+        $http.post('../api/user/', user).success(function(){
           $scope.reset();
           $scope.activePath = $location.path('listUser');
         });

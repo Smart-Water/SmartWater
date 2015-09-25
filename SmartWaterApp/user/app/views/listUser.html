@@ -1,37 +1,25 @@
 <h1 class="page-header">{{pageTitle}}</h1>
 <div class="panel panel-default">
-  <div class="panel-heading">Details</div>
+  <div class="panel-heading">List </div>
+  <div class="panel-heading"> <input type="text" ng-model="searchUser" placeholder="Search User"> </div>
   <table class="table">
     <thead>
       <tr>
-        <th>User Name</th>
+        <th>User</th>
         <th>CPF</th>
         <th>Email</th>
-        <th>Adress</th>
-        <th>City</th>
-        <th>State</th>
-        <th>Country</th>
-        <th>Number of Residents</th>
-        <th>ID Placa</th>
-        <th>Reports</th>
         <th>Edit</th>
         <th>Remove</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-model="user">
-        <td>{{user.name}}</td>
+      <tr ng-repeat="user in users | filter:searchUser | orderBy:'name'">
+        <td><a href="#/detailsUser/{{user.cpf}}" ng-class="{active: activetab == '/detailsUser'}">{{user.name}}</a></td>
         <td>{{user.cpf}}</td>
         <td>{{user.email}}</td>
-        <td>{{user.address}}</td>
-        <td>{{user.city}}</td>
-        <td>{{user.state_city}}</td>
-        <td>{{user.country}}</td>
-        <td>{{user.number_of_residents}}</td>
-        <td>{{user.mac_address}}</td>
-        <td><a href=""><span class="glyphicon glyphicon-file" aria-hidden="true"></span></a></td>
-        <td><a href=""><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-        <td><a href="" ng-click="confirmDelete(user)">
+        <td><a href="#/listUser/{{user.cpf}}" ng-class="{active: activetab == '/listUser'}"
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+        <td><a href="" ng-click="confirmDelete(user)" ng-class="{active: activetab == '/listUser'}"
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
       </tr>
     </tbody>

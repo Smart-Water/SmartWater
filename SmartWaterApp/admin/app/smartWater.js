@@ -34,6 +34,11 @@ app.config(function($routeProvider, $locationProvider)
      controller  : 'DetailsUserCtrl',
    })
 
+   .when('/about', {
+     templateUrl : 'app/views/about.html',
+     controller  : 'AboutCtrl',
+   })
+
    // caso não seja nenhum desses, redirecione para a rota '/'
    .otherwise ({ redirectTo: '/' });
 

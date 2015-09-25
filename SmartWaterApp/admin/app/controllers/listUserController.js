@@ -13,7 +13,7 @@ app.controller('UserListCtrl', function($scope,$http,$rootScope,$location,$route
   };
 
   $scope.deleteUser = function(userToDelete) {
-    $http.delete('api/user/'+userToDelete.cpf).success(function(data) {
+    $http.delete('../api/user/'+userToDelete.cpf).success(function(data) {
       findAllUsers($scope,$http);
     });
     $('#modalRemove').modal('hide');
@@ -23,7 +23,7 @@ app.controller('UserListCtrl', function($scope,$http,$rootScope,$location,$route
 
 function findAllUsers($scope,$http) {
 
-  $http.get('api/user/users/').success(function(data) {
+  $http.get('../api/user/users/').success(function(data) {
     $scope.users = data;
   });
 

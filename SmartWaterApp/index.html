@@ -1,167 +1,63 @@
 <!DOCTYPE html>
-<html ng-app="smartWater">
-   <head>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="shortcut icon" href="assets/images/favicon.ico" />
+  <title>smartWater</title>
 
-      <!--<base href="/SmartWater/SmartWaterApp/"></base> !-->
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <link rel="shortcut icon" href="assets/images/favicon.ico" />
+  <!-- jQuery -->
+  <script src="assets/vendor/jquery/jquery-2.1.4.js" charset="utf-8"></script>
 
-      <title>smartWater</title>
+  <!-- Bootstrap js and css file -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <script src="assets/vendor/bootstrap/js/bootstrap.js" charset="utf-8"></script>
 
-      <!-- AngularJS -->
-      <script src="assets/vendor/angularJS/angular.js" charset="utf-8"></script>
-      <script src="assets/vendor/angularJS/angular-route.js" charset="utf-8"></script>
-      <script src="assets/vendor/angularJS/angular-messages.js" charset="utf-8"></script>
-      <script src="assets/vendor/angularJS/mask.js" charset="utf-8"></script>
+  <!-- Custom styles -->
+  <link href="assets/css/home.css" rel="stylesheet">
 
-      <!-- jQuery -->
-      <script src="assets/vendor/jquery/jquery-2.1.4.js" charset="utf-8"></script>
+</head>
+<body>
 
-      <!-- Bootstrap js and css file -->
-      <link href="assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
-      <script src="assets/vendor/bootstrap/js/bootstrap.js" charset="utf-8"></script>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <div class="login-panel panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Please Sign In</h3>
+          </div>
+          <div class="panel-body">
+            <form id="form-login" role="form" method="post">
+              <fieldset>
+                <div class="form-group">
+                  <input class="form-control" placeholder="CPF" id="cpf" name="cpf" type="cpf" required="">
+                </div>
+                <div class="form-group">
+                  <input class="form-control" placeholder="Password" id="password" name="password" type="password" required="">
+                </div>
+                <div class="message">
 
-      <!-- Custom styles -->
-      <link href="assets/css/dashboard.css" rel="stylesheet">
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                  </label>
+                </div>
+                <input type="submit" class="btn btn-primary btn-block" value="Sign in" name="" placeholder="">
+              </fieldset>
 
-      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-      <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
-   </head>
-   <body>
-      <!-- Navbar header-->
-      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-         <div class="container-fluid">
-            <div class="navbar-header">
-               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                 <span class="sr-only">Toggle navigation</span>
-                 <span class="icon-bar"></span>
-                 <span class="icon-bar"></span>
-                 <span class="icon-bar"></span>
-               </button>
-                <span class="navbar-brand">
-                  <img alt="smartWater" class="navbar-logo" src="assets/images/logoOnly.png" aria-hidden="true">
-                  <span class="first-word">smart</span><span class="second-word">Water</span>
-               </span>
-            </div>
-            <div class="navbar-collapse collapse">
-               <ul class="nav navbar-nav navbar-right dashboard">
-                  <li class="dropdown">
-                     <a id="dashboard-btn" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                     <i class="glyphicon glyphicon-dashboard" aria-hidden="true"></i>Dashboard <b class="caret"></b></a>
-                     <ul class="dropdown-menu" role="menu" aria-labelledby="dashboard-btn">
-                        <li role="presentation">
-                           <a role="menuitem" tabindex="-1" a href="#/listUser" ng-class="{active: activetab == '/listUser'}">
-                           <i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>All users</a>
-                        </li>
-                        <li role="presentation">
-                           <a role="menuitem" tabindex="-1" href="#/addUser" ng-class="{active: activetab == '/addUser'}">
-                           <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>Add new</a>
-                        </li>
-                        <li role="presentation">
-                           <a role="menuitem" tabindex="-1" href="">Report 1</a>
-                        </li>
-                        <li role="presentation">
-                           <a role="menuitem" tabindex="-1" href="">Report 2</a>
-                        </li>
-                        <li role="presentation">
-                           <a role="menuitem" tabindex="-1" href="">Report 3</a>
-                        </li>
-                     </ul>
-                  </li>
-                  <li><a href="" class="changePassword">
-                     <i class="glyphicon glyphicon-refresh" aria-hidden="true"></i>
-                     Change Password
-                     </a>
-                  </li>
-                  <li><a href="">
-                     <i class="glyphicon glyphicon-book" aria-hidden="true"></i>
-                     About
-                     </a>
-                  </li>
-                  <li><a href="" onclick="return confirm('Are you sure?')">
-                     <i class="glyphicon glyphicon-log-out" aria-hidden="true"></i>
-                     Logout
-                     </a>
-                  </li>
-               </ul>
-            </div>
-         </div>
+            </form>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
+</body>
 
-      <!-- Sidebar -->
-      <div class="container-fluid">
-         <div class="row">
-            <div class="col-sm-3 col-md-2 sidebar" id="sidebar">
-               <ul class="nav nav-sidebar">
-                  <li class="item-sidebar active" ng-class="{active: activetab == '/'}">
-                     <a href="#/">
-                     <i class="glyphicon glyphicon-dashboard" aria-hidden="true"></i>
-                     Dashboard
-                     </a>
-                  </li>
-                  <li class="item-sidebar collapsed">
-                     <a href="" data-toggle="collapse" data-target="#sub-menu-users" data-parent="#sidebar">
-                     <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
-                     Users
-                     <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                     </a>
-                  </li>
-                  <ul class="nav sub-menu collapse" id="sub-menu-users">
-                     <li ng-class="{active: activetab == '/listUser'}">
-                        <a href="#/listUser">
-                        <i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
-                        All users
-                        </a>
-                     </li>
-                     <li ng-class="{active: activetab == '/addUser'}">
-                        <a href="#/addUser">
-                        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
-                        Add new
-                        </a>
-                     </li>
-                  </ul>
-                  <li class="item-sidebar collapsed" >
-                     <a href=""  data-toggle="collapse" data-target="#sub-menu-reports" data-parent="#sidebar">
-                     <i class="glyphicon glyphicon-paste" aria-hidden="true"></i>
-                     Reports
-                     <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
-                     </a>
-                  </li>
-                  <ul class="nav sub-menu collapse" id="sub-menu-reports">
-                     <li>
-                        <a href="#">Report 1</a>
-                     </li>
-                     <li>
-                        <a href="#">Report 2</a>
-                     </li>
-                     <li>
-                        <a href="#">Report 3</a>
-                     </li>
-                  </ul>
-               </ul>
-            </div>
+<footer>
+  <a href="https://github.com/Smart-Water/SmartWater" target="_blank">
+    <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"> GitHub</span>
+  </a>
+</footer>
 
-            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-               <div ng-view></div>
-            </div>
-
-         </div>
-      </div>
-
-      <!-- Include all compiled plugins (below), or include individual files as needed -->
-      <script src="assets/js/dashboard.js" charset="utf-8"></script>
-
-      <!-- AngularJS scripts -->
-      <script src="app/smartWater.js" charset="utf-8"></script>
-      <script src="app/controllers/dashboardController.js" charset="utf-8"></script>
-      <script src="app/controllers/addUserController.js" charset="utf-8"></script>
-      <script src="app/controllers/listUserController.js" charset="utf-8"></script>
-      <script src="app/controllers/detailsUserController.js" charset="utf-8"></script>
-
-   </body>
 </html>
