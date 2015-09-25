@@ -33,13 +33,29 @@ $app->get('/users/', function ()  {
 });
 
 $app->get('/:cpf', function ($cpf)  {
-  //$sql = "SELECT * FROM users, boards where users.cpf=:cpf and boards.cpf_user =:cpf";
   $sql = "SELECT * FROM users where cpf=:cpf";
   try {
     $conn = new Connection();
     $db = $conn->getConnection();
     $stmt = $db->prepare($sql);
     $stmt->bindParam("cpf", $cpf);
+    $stmt->execute();
+    $user = $stmt->fetchObject();
+    $db = null;
+    echo json_encode($user);
+  } catch(PDOException $e) {
+    echo '{"error":{"text":'. $e->getMessage() .'}}';
+  }
+});
+
+$app->get('/:cpf/:password', function ($cpf,$password)  {
+  $sql = "SELECT * FROM users where cpf=:cpf and password=:password";
+  try {
+    $conn = new Connection();
+    $db = $conn->getConnection();
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam("cpf", $cpf);
+    $stmt->bindParam("password", $password);
     $stmt->execute();
     $user = $stmt->fetchObject();
     $db = null;
