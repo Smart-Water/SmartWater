@@ -86,7 +86,7 @@
                      About
                      </a>
                   </li>
-                  <li><a href="" onclick="return confirm('Are you sure?')">
+                  <li><a href="" onclick="logout()">
                      <i class="glyphicon glyphicon-log-out" aria-hidden="true"></i>
                      Logout
                      </a>
@@ -156,6 +156,26 @@
          </div>
       </div>
 
+      <!-- Modal Logout -->
+      <div class="modal fade" id="modalLogout" tabindex="-1" role="dialog" aria-labelledby="modalLogoutLabel" aria-hidden="true"
+      visible="showModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="modalLogoutLabel">Logout</h4>
+            </div>
+            <div class="modal-body">
+              Are you sure?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" onclick="confirmLogout()">Confirm</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Include all compiled plugins (below), or include individual files as needed -->
       <script src="../assets/js/dashboard.js" charset="utf-8"></script>
 
@@ -166,6 +186,7 @@
       <script src="app/controllers/listUserController.js" charset="utf-8"></script>
       <script src="app/controllers/detailsUserController.js" charset="utf-8"></script>
       <script src="app/controllers/aboutController.js" charset="utf-8"></script>
+      <script src="app/controllers/logoutController.js" charset="utf-8"></script>
 
    </body>
 </html>

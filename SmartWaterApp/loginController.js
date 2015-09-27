@@ -8,12 +8,12 @@ app.controller('loginCtrl', function($scope, $http, $rootScope, $location)
   $scope.loginFunction = function() {
 
     $http.get('api/user/'+$scope.user.cpf+'/'+$scope.user.password).success(function(data) {
-      $scope.user = data;
 
-      if($scope.user == 'false') {
+      if(data == 'false') {
         $scope.error = true;
         $scope.errorMessage = 'Email or Password Incorrect!';
       } else {
+        $scope.user = data;
         if($scope.user.access_level == 1) {
           window.location.href = '/SmartWater/SmartWaterApp/admin';
         } else {
