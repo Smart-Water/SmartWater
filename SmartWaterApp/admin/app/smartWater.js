@@ -39,6 +39,11 @@ app.config(function($routeProvider, $locationProvider)
      controller  : 'AboutCtrl',
    })
 
+   .when('/changePassword', {
+     templateUrl : 'app/views/changePassword.html',
+     controller  : 'changePasswordCtrl',
+   })
+
    // caso não seja nenhum desses, redirecione para a rota '/'
    .otherwise ({ redirectTo: '/' });
 

@@ -61,10 +61,10 @@
                            <a role="menuitem" tabindex="-1" a href="#/listUser" ng-class="{active: activetab == '/listUser'}">
                            <i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>All users</a>
                         </li>
-                        <li role="presentation">
+                        <!--<li role="presentation">
                            <a role="menuitem" tabindex="-1" href="#/addUser" ng-class="{active: activetab == '/addUser'}">
                            <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>Add new</a>
-                        </li>
+                        </li> !-->
                         <li role="presentation">
                            <a role="menuitem" tabindex="-1" href="">Report 1</a>
                         </li>
@@ -76,7 +76,7 @@
                         </li>
                      </ul>
                   </li>
-                  <li><a href="" class="changePassword">
+                  <li><a href="#/changePassword" ng-class="{active: activetab == '/changePassword'}">
                      <i class="glyphicon glyphicon-refresh" aria-hidden="true"></i>
                      Change Password
                      </a>
@@ -121,12 +121,12 @@
                         All users
                         </a>
                      </li>
-                     <li ng-class="{active: activetab == '/addUser'}">
+                     <!--<li ng-class="{active: activetab == '/addUser'}">
                         <a href="#/addUser">
                         <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
                         Add new
                         </a>
-                     </li>
+                     </li>!-->
                   </ul>
                   <li class="item-sidebar collapsed" >
                      <a href=""  data-toggle="collapse" data-target="#sub-menu-reports" data-parent="#sidebar">
@@ -182,11 +182,12 @@
       <!-- AngularJS scripts -->
       <script src="app/smartWater.js" charset="utf-8"></script>
       <script src="app/controllers/dashboardController.js" charset="utf-8"></script>
-      <script src="app/controllers/addUserController.js" charset="utf-8"></script>
+      <!--<script src="app/controllers/addUserController.js" charset="utf-8"></script>!-->
       <script src="app/controllers/listUserController.js" charset="utf-8"></script>
       <script src="app/controllers/detailsUserController.js" charset="utf-8"></script>
       <script src="app/controllers/aboutController.js" charset="utf-8"></script>
       <script src="app/controllers/logoutController.js" charset="utf-8"></script>
+      <script src="app/controllers/changePasswordController.js" charset="utf-8"></script>
 
    </body>
 </html>

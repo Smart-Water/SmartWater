@@ -14,11 +14,6 @@ app.config(function($routeProvider, $locationProvider)
       controller     : 'DashboardCtrl',
    })
 
-   .when('/addUser', {
-      templateUrl : 'app/views/user.html',
-      controller     : 'addUserCtrl',
-   })
-
    .when('/listUser', {
      templateUrl : 'app/views/listUser.html',
      controller  : 'UserListCtrl',
@@ -37,6 +32,11 @@ app.config(function($routeProvider, $locationProvider)
    .when('/about', {
      templateUrl : 'app/views/about.html',
      controller  : 'AboutCtrl',
+   })
+
+   .when('/changePassword', {
+     templateUrl : 'app/views/changePassword.html',
+     controller  : 'changePasswordCtrl',
    })
 
    // caso não seja nenhum desses, redirecione para a rota '/'

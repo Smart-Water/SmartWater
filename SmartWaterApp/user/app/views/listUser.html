@@ -8,8 +8,6 @@
         <th>User</th>
         <th>CPF</th>
         <th>Email</th>
-        <th>Edit</th>
-        <th>Remove</th>
       </tr>
     </thead>
     <tbody>
@@ -17,10 +15,6 @@
         <td><a href="#/detailsUser/{{user.cpf}}" ng-class="{active: activetab == '/detailsUser'}">{{user.name}}</a></td>
         <td>{{user.cpf}}</td>
         <td>{{user.email}}</td>
-        <td><a href="#/listUser/{{user.cpf}}" ng-class="{active: activetab == '/listUser'}"
-          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-        <td><a href="" ng-click="confirmDelete(user)" ng-class="{active: activetab == '/listUser'}"
-          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
       </tr>
     </tbody>
   </table>

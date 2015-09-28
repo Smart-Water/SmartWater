@@ -136,6 +136,28 @@ $app->put('/:cpf', function ($cpf) {
   }
 });
 
+$app->put('/password/', function () {
+  $request = \Slim\Slim::getInstance()->request();
+  $body = $request->getBody();
+  $user = json_decode($body);
+
+  $sql = "UPDATE users SET password=:password WHERE cpf=:cpf";
+  try {
+    $conn = new Connection();
+    $db = $conn->getConnection();
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam("cpf", $user->cpf);
+    $stmt->bindParam("password", $user->password);
+    $stmt->execute();
+    $db = null;
+    unset($_SESSION['password_session']);
+    $_SESSION['password_session'] = $user->password;
+    echo json_encode($user);
+  } catch(PDOException $e) {
+    echo '{"error":{"text":'. $e->getMessage() .'}}';
+  }
+});
+
 $app->delete('/:cpf', function($cpf) {
   $sql = "DELETE FROM users WHERE cpf=:cpf";
   try {

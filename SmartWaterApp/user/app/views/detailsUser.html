@@ -12,10 +12,7 @@
         <th>State</th>
         <th>Country</th>
         <th>Number of Residents</th>
-        <th>ID Placa</th>
         <th>Reports</th>
-        <th>Edit</th>
-        <th>Remove</th>
       </tr>
     </thead>
     <tbody>
@@ -28,14 +25,10 @@
         <td>{{user.state_city}}</td>
         <td>{{user.country}}</td>
         <td>{{user.number_of_residents}}</td>
-        <td>{{user.mac_address}}</td>
         <td><a href="" title="Monthly Report"><span class="glyphicon glyphicon-file" aria-hidden="true"></span></a>
             <a href="" title="Report by User"><span class="glyphicon glyphicon-file" aria-hidden="true"></span></a>
             <a href="" title="Total Consumption"><span class="glyphicon glyphicon-file" aria-hidden="true"></span></a>
         </td>
-        <td><a href=""><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-        <td><a href="" ng-click="confirmDelete(user)">
-          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
       </tr>
     </tbody>
   </table>

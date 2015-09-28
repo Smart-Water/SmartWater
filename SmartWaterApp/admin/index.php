@@ -76,7 +76,7 @@
                         </li>
                      </ul>
                   </li>
-                  <li><a href="" class="changePassword">
+                  <li><a href="#/changePassword" ng-class="{active: activetab == '/changePassword'}">
                      <i class="glyphicon glyphicon-refresh" aria-hidden="true"></i>
                      Change Password
                      </a>
@@ -187,6 +187,7 @@
       <script src="app/controllers/detailsUserController.js" charset="utf-8"></script>
       <script src="app/controllers/aboutController.js" charset="utf-8"></script>
       <script src="app/controllers/logoutController.js" charset="utf-8"></script>
+      <script src="app/controllers/changePasswordController.js" charset="utf-8"></script>
 
    </body>
 </html>
