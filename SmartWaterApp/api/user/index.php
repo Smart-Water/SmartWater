@@ -62,11 +62,11 @@ $app->get('/:cpf/:password', function ($cpf,$password)  {
     $user = $stmt->fetchObject();
     $db = null;
     if($user != null) {
-      $_SESSION['login_session'] = $cpf;
+      $_SESSION['cpf_session'] = $cpf;
       $_SESSION['password_session'] = $password;
       $_SESSION['access_level_session'] = $user->access_level;
     } else {
-      unset($_SESSION['login_session']);
+      unset($_SESSION['cpf_session']);
       unset($_SESSION['password_session']);
       unset($_SESSION['access_level_session']);
     }
