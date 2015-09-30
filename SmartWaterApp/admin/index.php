@@ -10,7 +10,7 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <link rel="shortcut icon" href="../assets/images/favicon.ico" />
 
-      <title>SmartWater</title>
+      <title>smartWater</title>
 
       <!-- AngularJS -->
       <script src="../assets/vendor/angularJS/angular.js" charset="utf-8"></script>

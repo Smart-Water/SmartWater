@@ -44,5 +44,5 @@ INSERT INTO access_level(description) VALUES ('User');
 
 INSERT INTO USERS (cpf, name, address, city, state_city, country, zip_code,
 password, email, number_of_residents, access_level) VALUES
-('09678577699','Admin','Rua Francisco Sales','Pouso Alegre','MG','Brasil',
+('09678577674','Admin','Rua Francisco Sales','Pouso Alegre','MG','Brasil',
 37550000,'master','admin@admin.com',0,1);

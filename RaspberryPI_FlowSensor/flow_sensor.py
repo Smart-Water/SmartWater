@@ -7,7 +7,7 @@ import RPi.GPIO as GPIO
 import time,sys,os
 
 #Constant variables
-MQTT_HOST = 'test.mosquitto.org'
+MQTT_HOST = '54.94.199.117'
 FLOW_SENSOR = 23
 DELAY = 10
 
@@ -31,9 +31,9 @@ def read_initial_pulses():
         pulses_total_file = open("pulses.txt","r+")
         count = int(pulses_total_file.read())
         pulses_total_file.close()
-        print("arquivo existe")
+        #print("arquivo existe")
     else:
-        print("arquivo nao existe")
+        #print("arquivo nao existe")
         pulses_total_file = open("pulses.txt","w+")
         pulses_total_file.write("0")
         pulses_total_file.close()
@@ -56,7 +56,7 @@ def count_pulses(channel):
 def calc_flow(pulses):
     global flow
     flow = (pulses * 2.25 / 1000)
-    print "The flow is: %.3f Liters for the mac address %s at %s " % (flow, \
+    #print "The flow is: %.3f Liters for the mac address %s at %s " % (flow, \
     mac_address,get_current_time())
 
 # The callback for publish the mac,time and flow in mosquitto server

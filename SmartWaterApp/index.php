@@ -75,6 +75,6 @@ session_start();
   </a>
 </footer>
 
-<script src="loginController.js" charset="utf-8"></script>
+<script src="assets/js/loginController.js" charset="utf-8"></script>
 
 </html>

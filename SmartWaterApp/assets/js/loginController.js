@@ -15,9 +15,9 @@ app.controller('loginCtrl', function($scope, $http, $rootScope, $location)
       } else {
         $scope.user = data;
         if($scope.user.access_level == 1) {
-          window.location.href = '/SmartWater/SmartWaterApp/admin';
+          window.location.href = '/admin';
         } else {
-          window.location.href = '/SmartWater/SmartWaterApp/user';
+          window.location.href = '/user';
         }
       }
 

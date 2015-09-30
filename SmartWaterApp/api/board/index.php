@@ -60,8 +60,9 @@ $app->post('/', function () {
   try {
     $conn = new Connection();
     $db = $conn->getConnection();
-
     $stmt = $db->prepare($sql);
+    $boardLowerCase = strtolower($board->mac_address);
+    $board->mac_address = $boardLowerCase;
     $stmt->bindParam("mac_address", $board->mac_address);
     $stmt->bindParam("cpf_user", $board->cpf_user);
     $stmt->execute();
