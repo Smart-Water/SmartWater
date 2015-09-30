@@ -49,18 +49,22 @@ def get_current_time():
 def count_pulses(channel):
     global count
     count = count+1
-    pulses_total_file.write(str(count))
-    pulses_total_file.seek(0)
 
 # The calback to convert the total of pulses in water flow.
 def calc_flow(pulses):
     global flow
     flow = (pulses * 2.25 / 1000)
-    print "The flow is: %.3f Liters for the mac address %s at %s " % (flow, \
-    mac_address,get_current_time())
+    #print "The flow is: %.3f Liters for the mac address %s at %s " % (flow, \
+    #mac_address,get_current_time())
 
+# Update count value into file pulses.txt
+def update_file(count):
+    pulses_total_file.write(str(count))
+    pulses_total_file.seek(0)
+	
 # The callback for publish the mac,time and flow in mosquitto server
 def publish_mqtt(flow):
+    update_file(count)
     publish.single(("UNIVAS_TCC_2015/%s/waterFlow" % (mac_address)), \
     ('{"mac_address":"%s","date":"%s","flow":"%.3f"}' % (mac_address, \
     get_current_time(),flow)),qos=1, hostname=MQTT_HOST)
