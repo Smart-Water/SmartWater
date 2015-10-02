@@ -1,4 +1,4 @@
-var app = angular.module('smartWater',['ngRoute', 'ngMessages','ui.mask']);
+var app = angular.module('smartWater',['ngRoute', 'ngMessages','ui.mask','highcharts-ng','ngCookies']);
 
 app.config(function($routeProvider, $locationProvider)
 {

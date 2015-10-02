@@ -17,9 +17,15 @@
       <script src="../assets/vendor/angularJS/angular-route.js" charset="utf-8"></script>
       <script src="../assets/vendor/angularJS/angular-messages.js" charset="utf-8"></script>
       <script src="../assets/vendor/angularJS/mask.js" charset="utf-8"></script>
+      <script src="../assets/vendor/angularJS/angular-cookies.js" charset="utf-8"></script>
 
       <!-- jQuery -->
       <script src="../assets/vendor/jquery/jquery-2.1.4.js" charset="utf-8"></script>
+
+      <!-- Highcharts -->
+      <script src="../assets/js/highcharts-ng.js" charset="utf-8"></script>
+      <script src="../assets/js/highcharts.js" charset="utf-8"></script>
+      <script src="../assets/js/exporting.js" charset="utf-8"></script>
 
       <!-- Bootstrap js and css file -->
       <link href="../assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">

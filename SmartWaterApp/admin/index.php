@@ -17,9 +17,15 @@
       <script src="../assets/vendor/angularJS/angular-route.js" charset="utf-8"></script>
       <script src="../assets/vendor/angularJS/angular-messages.js" charset="utf-8"></script>
       <script src="../assets/vendor/angularJS/mask.js" charset="utf-8"></script>
+      <script src="../assets/vendor/angularJS/angular-cookies.js" charset="utf-8"></script>
 
       <!-- jQuery -->
       <script src="../assets/vendor/jquery/jquery-2.1.4.js" charset="utf-8"></script>
+
+      <!-- Highcharts -->
+      <script src="../assets/js/highcharts-ng.js" charset="utf-8"></script>
+      <script src="../assets/js/highcharts.js" charset="utf-8"></script>
+      <script src="../assets/js/exporting.js" charset="utf-8"></script>
 
       <!-- Bootstrap js and css file -->
       <link href="../assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
@@ -65,14 +71,14 @@
                            <a role="menuitem" tabindex="-1" href="#/addUser" ng-class="{active: activetab == '/addUser'}">
                            <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>Add new</a>
                         </li>
-                        <li role="presentation">
-                           <a role="menuitem" tabindex="-1" href="">Report 1</a>
+                        <li role="presentation" ng-class="{active: activetab == '/report1'}">
+                           <a role="menuitem" tabindex="-1" href="#/report1">Report 1</a>
                         </li>
-                        <li role="presentation">
-                           <a role="menuitem" tabindex="-1" href="">Report 2</a>
+                        <li role="presentation" ng-class="{active: activetab == '/report2'}">
+                           <a role="menuitem" tabindex="-1" href="#/report2">Report 2</a>
                         </li>
-                        <li role="presentation">
-                           <a role="menuitem" tabindex="-1" href="">Report 3</a>
+                        <li role="presentation" ng-class="{active: activetab == '/report3'}">
+                           <a role="menuitem" tabindex="-1" href="#/report3">Report 3</a>
                         </li>
                      </ul>
                   </li>
@@ -136,14 +142,14 @@
                      </a>
                   </li>
                   <ul class="nav sub-menu collapse" id="sub-menu-reports">
-                     <li>
-                        <a href="#">Report 1</a>
+                     <li ng-class="{active: activetab == '/report1'}">
+                        <a href="#/report1">Report 1</a>
                      </li>
-                     <li>
-                        <a href="#">Report 2</a>
+                     <li ng-class="{active: activetab == '/report2'}">
+                        <a href="#/report2">Report 2</a>
                      </li>
-                     <li>
-                        <a href="#">Report 3</a>
+                     <li ng-class="{active: activetab == '/report3'}">
+                        <a href="#/report3">Report 3</a>
                      </li>
                   </ul>
                </ul>
@@ -188,6 +194,9 @@
       <script src="app/controllers/aboutController.js" charset="utf-8"></script>
       <script src="app/controllers/logoutController.js" charset="utf-8"></script>
       <script src="app/controllers/changePasswordController.js" charset="utf-8"></script>
+      <script src="app/controllers/report1Controller.js" charset="utf-8"></script>
+      <script src="app/controllers/report2Controller.js" charset="utf-8"></script>
+      <script src="app/controllers/report3Controller.js" charset="utf-8"></script>
 
    </body>
 </html>

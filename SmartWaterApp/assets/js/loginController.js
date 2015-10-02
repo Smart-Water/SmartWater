@@ -1,6 +1,6 @@
-var app = angular.module('login',['ngMessages','ui.mask']);
+var app = angular.module('login',['ngMessages','ui.mask','ngCookies']);
 
-app.controller('loginCtrl', function($scope, $http, $rootScope, $location)
+app.controller('loginCtrl', function($scope, $http, $rootScope, $location,$cookies)
 {
 
   $rootScope.activetab = $location.path();
@@ -14,10 +14,11 @@ app.controller('loginCtrl', function($scope, $http, $rootScope, $location)
         $scope.errorMessage = 'Email or Password Incorrect!';
       } else {
         $scope.user = data;
+        $cookies.put('userCPF', $scope.user.cpf);
         if($scope.user.access_level == 1) {
-          window.location.href = '/admin';
+          window.location.href = '/SmartWater/SmartWaterApp/admin';
         } else {
-          window.location.href = '/user';
+          window.location.href = '/SmartWater/SmartWaterApp/user';
         }
       }
 

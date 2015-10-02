@@ -23,6 +23,7 @@ def read_mac():
     mac_in_hex = hex(get_mac())
     mac_address = str(mac_in_hex).replace("0x","")
     mac_address = mac_address.replace("L","")
+    mac_address = mac_address.zfill(12)
 
 # The callback to read initial pulses stored on board when start the system
 def read_initial_pulses():
@@ -61,7 +62,7 @@ def calc_flow(pulses):
 def update_file(count):
     pulses_total_file.write(str(count))
     pulses_total_file.seek(0)
-	
+
 # The callback for publish the mac,time and flow in mosquitto server
 def publish_mqtt(flow):
     update_file(count)
