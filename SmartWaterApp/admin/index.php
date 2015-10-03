@@ -31,6 +31,10 @@
       <link href="../assets/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
       <script src="../assets/vendor/bootstrap/js/bootstrap.js" charset="utf-8"></script>
 
+      <!-- FlipClock Lib -->
+      <link href="../assets/vendor/flipclock/flipclock.css" rel="stylesheet">
+      <script src="../assets/vendor/flipclock/flipclock.js" charset="utf-8"></script>
+
       <!-- Custom styles -->
       <link href="../assets/css/dashboard.css" rel="stylesheet">
 

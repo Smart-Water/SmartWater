@@ -68,21 +68,21 @@
                      <i class="glyphicon glyphicon-dashboard" aria-hidden="true"></i>Dashboard <b class="caret"></b></a>
                      <ul class="dropdown-menu" role="menu" aria-labelledby="dashboard-btn">
                         <li role="presentation">
-                           <a role="menuitem" tabindex="-1" a href="#/listUser" ng-class="{active: activetab == '/listUser'}">
-                           <i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>All users</a>
+                           <a role="menuitem" tabindex="-1" a href="#/detailsUser" ng-class="{active: activetab == '/detailsUser'}">
+                           <i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>User Info</a>
                         </li>
                         <!--<li role="presentation">
                            <a role="menuitem" tabindex="-1" href="#/addUser" ng-class="{active: activetab == '/addUser'}">
                            <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>Add new</a>
                         </li> !-->
-                        <li role="presentation">
-                           <a role="menuitem" tabindex="-1" href="">Report 1</a>
+                        <li role="presentation" ng-class="{active: activetab == '/report1'}">
+                           <a role="menuitem" tabindex="-1" href="#/report1">Report 1</a>
                         </li>
-                        <li role="presentation">
-                           <a role="menuitem" tabindex="-1" href="">Report 2</a>
+                        <li role="presentation" ng-class="{active: activetab == '/report2'}">
+                           <a role="menuitem" tabindex="-1" href="#/report2">Report 2</a>
                         </li>
-                        <li role="presentation">
-                           <a role="menuitem" tabindex="-1" href="">Report 3</a>
+                        <li role="presentation" ng-class="{active: activetab == '/report3'}">
+                           <a role="menuitem" tabindex="-1" href="#/report3">Report 3</a>
                         </li>
                      </ul>
                   </li>
@@ -120,15 +120,15 @@
                   <li class="item-sidebar collapsed">
                      <a href="" data-toggle="collapse" data-target="#sub-menu-users" data-parent="#sidebar">
                      <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
-                     Users
+                     User
                      <i class="indicator glyphicon glyphicon-chevron-down  pull-right"></i>
                      </a>
                   </li>
                   <ul class="nav sub-menu collapse" id="sub-menu-users">
-                     <li ng-class="{active: activetab == '/listUser'}">
-                        <a href="#/listUser">
+                     <li ng-class="{active: activetab == '/detailsUser'}">
+                        <a href="#/detailsUser">
                         <i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
-                        All users
+                        User Info
                         </a>
                      </li>
                      <!--<li ng-class="{active: activetab == '/addUser'}">
@@ -146,14 +146,14 @@
                      </a>
                   </li>
                   <ul class="nav sub-menu collapse" id="sub-menu-reports">
-                     <li>
-                        <a href="#">Report 1</a>
+                     <li ng-class="{active: activetab == '/report1'}">
+                        <a href="#/report1">Report 1</a>
                      </li>
-                     <li>
-                        <a href="#">Report 2</a>
+                     <li ng-class="{active: activetab == '/report2'}">
+                        <a href="#/report2">Report 2</a>
                      </li>
-                     <li>
-                        <a href="#">Report 3</a>
+                     <li ng-class="{active: activetab == '/report3'}">
+                        <a href="#/report3">Report 3</a>
                      </li>
                   </ul>
                </ul>
@@ -193,11 +193,14 @@
       <script src="app/smartWater.js" charset="utf-8"></script>
       <script src="app/controllers/dashboardController.js" charset="utf-8"></script>
       <!--<script src="app/controllers/addUserController.js" charset="utf-8"></script>!-->
-      <script src="app/controllers/listUserController.js" charset="utf-8"></script>
+      <!--<script src="app/controllers/listUserController.js" charset="utf-8"></script>!-->
       <script src="app/controllers/detailsUserController.js" charset="utf-8"></script>
       <script src="app/controllers/aboutController.js" charset="utf-8"></script>
       <script src="app/controllers/logoutController.js" charset="utf-8"></script>
       <script src="app/controllers/changePasswordController.js" charset="utf-8"></script>
+      <script src="app/controllers/report1Controller.js" charset="utf-8"></script>
+      <script src="app/controllers/report2Controller.js" charset="utf-8"></script>
+      <script src="app/controllers/report3Controller.js" charset="utf-8"></script>
 
    </body>
 </html>

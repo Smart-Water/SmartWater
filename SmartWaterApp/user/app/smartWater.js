@@ -24,7 +24,7 @@ app.config(function($routeProvider, $locationProvider)
      controller  : 'UserListCtrl',
    })
 
-   .when('/detailsUser/:cpf', {
+   .when('/detailsUser', {
      templateUrl : 'app/views/detailsUser.html',
      controller  : 'DetailsUserCtrl',
    })
@@ -37,6 +37,21 @@ app.config(function($routeProvider, $locationProvider)
    .when('/changePassword', {
      templateUrl : 'app/views/changePassword.html',
      controller  : 'changePasswordCtrl',
+   })
+
+   .when('/report1', {
+     templateUrl : 'app/views/report1.html',
+     controller  : 'report1Ctrl',
+   })
+
+   .when('/report2', {
+     templateUrl : 'app/views/report2.html',
+     controller  : 'report2Ctrl',
+   })
+
+   .when('/report3', {
+     templateUrl : 'app/views/report3.html',
+     controller  : 'report3Ctrl',
    })
 
    // caso não seja nenhum desses, redirecione para a rota '/'
