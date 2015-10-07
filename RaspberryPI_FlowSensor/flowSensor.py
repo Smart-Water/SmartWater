@@ -7,7 +7,7 @@ import RPi.GPIO as GPIO
 import time,sys,os
 
 #Constant variables
-MQTT_HOST = 'test.mosquitto.org'
+MQTT_HOST = '54.94.199.117'
 FLOW_SENSOR = 23
 DELAY = 10
 
