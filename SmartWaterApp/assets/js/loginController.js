@@ -11,7 +11,7 @@ app.controller('loginCtrl', function($scope, $http, $rootScope, $location,$cooki
 
       if(data == 'false') {
         $scope.error = true;
-        $scope.errorMessage = 'Email or Password Incorrect!';
+        $scope.errorMessage = 'CPF or Password Incorrect!';
       } else {
         $scope.user = data;
         $cookies.put('userCPF', $scope.user.cpf);

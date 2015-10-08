@@ -88,7 +88,7 @@ function setCharts($scope,$http, userCPF){
           }
         },
         series: [{
-          name: 'Months',
+          name: 'Water',
           data: months.series
         }]
       }
