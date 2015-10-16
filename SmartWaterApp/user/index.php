@@ -75,8 +75,8 @@
                            <a role="menuitem" tabindex="-1" href="#/addUser" ng-class="{active: activetab == '/addUser'}">
                            <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>Add new</a>
                         </li> !-->
-                        <li role="presentation" ng-class="{active: activetab == '/report1'}">
-                           <a role="menuitem" tabindex="-1" href="#/report1">Report 1</a>
+                        <li role="presentation" ng-class="{active: activetab == '/daily'}">
+                           <a role="menuitem" tabindex="-1" href="#/daily">Daily</a>
                         </li>
                         <li role="presentation" ng-class="{active: activetab == '/report2'}">
                            <a role="menuitem" tabindex="-1" href="#/report2">Report 2</a>
@@ -146,8 +146,8 @@
                      </a>
                   </li>
                   <ul class="nav sub-menu collapse" id="sub-menu-reports">
-                     <li ng-class="{active: activetab == '/report1'}">
-                        <a href="#/report1">Report 1</a>
+                     <li ng-class="{active: activetab == '/daily'}">
+                        <a href="#/daily">Daily</a>
                      </li>
                      <li ng-class="{active: activetab == '/report2'}">
                         <a href="#/report2">Report 2</a>
@@ -198,7 +198,7 @@
       <script src="app/controllers/aboutController.js" charset="utf-8"></script>
       <script src="app/controllers/logoutController.js" charset="utf-8"></script>
       <script src="app/controllers/changePasswordController.js" charset="utf-8"></script>
-      <script src="app/controllers/report1Controller.js" charset="utf-8"></script>
+      <script src="app/controllers/reportDailyController.js" charset="utf-8"></script>
       <script src="app/controllers/report2Controller.js" charset="utf-8"></script>
       <script src="app/controllers/report3Controller.js" charset="utf-8"></script>
 

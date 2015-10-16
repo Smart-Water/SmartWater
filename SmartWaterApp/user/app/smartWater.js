@@ -39,9 +39,9 @@ app.config(function($routeProvider, $locationProvider)
      controller  : 'changePasswordCtrl',
    })
 
-   .when('/report1', {
-     templateUrl : 'app/views/report1.html',
-     controller  : 'report1Ctrl',
+   .when('/daily', {
+     templateUrl : 'app/views/reportDaily.html',
+     controller  : 'reportDailyCtrl',
    })
 
    .when('/report2', {

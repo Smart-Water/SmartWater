@@ -5,7 +5,7 @@ app.controller('DashboardCtrl', function($scope, $http, $rootScope, $location,$c
   userCPF = $cookies.get('userCPF');
 
   //set charts
-  setCharts($scope,$http, userCPF)
+  setCharts($scope,$http, userCPF);
 
   //set counters
   setGeneralTotal($http,userCPF);
