@@ -7,9 +7,10 @@ import RPi.GPIO as GPIO
 import time,sys,os
 
 #Constant variables
-MQTT_HOST = '54.94.199.117'
+MQTT_HOST = 'test.mosquitto.org'
 FLOW_SENSOR = 23
 DELAY = 10
+FILE_PATH = '/home/pi/waterFlow/pulses.txt'
 
 #global variables
 global count
@@ -28,14 +29,12 @@ def read_mac():
 # The callback to read initial pulses stored on board when start the system
 def read_initial_pulses():
     global count
-    if os.path.isfile('pulses.txt'):
-        pulses_total_file = open("pulses.txt","r+")
+    if os.path.isfile(FILE_PATH):
+        pulses_total_file = open(FILE_PATH,"r+")
         count = int(pulses_total_file.read())
         pulses_total_file.close()
-        #print("arquivo existe")
     else:
-        #print("arquivo nao existe")
-        pulses_total_file = open("pulses.txt","w+")
+        pulses_total_file = open(FILE_PATH,"w+")
         pulses_total_file.write("0")
         pulses_total_file.close()
         count = 0
@@ -80,7 +79,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(FLOW_SENSOR, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 GPIO.add_event_detect(FLOW_SENSOR, GPIO.FALLING, callback=count_pulses)
 
-pulses_total_file = open("pulses.txt","w+")
+pulses_total_file = open(FILE_PATH,"w+")
 
 while True:
     try:
