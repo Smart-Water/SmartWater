@@ -65,9 +65,12 @@ def update_file(count):
 # The callback for publish the mac,time and flow in mosquitto server
 def publish_mqtt(flow):
     update_file(count)
-    publish.single(("UNIVAS_TCC_2015/%s/waterFlow" % (mac_address)), \
-    ('{"mac_address":"%s","date":"%s","flow":"%.3f"}' % (mac_address, \
-    get_current_time(),flow)),qos=1, hostname=MQTT_HOST)
+    try:
+        publish.single(("UNIVAS_TCC_2015/%s/waterFlow" % (mac_address)), \
+        ('{"mac_address":"%s","date":"%s","flow":"%.3f"}' % (mac_address, \
+        get_current_time(),flow)),qos=1, hostname=MQTT_HOST)
+    except:
+        pass
 
 #read initial pulses stored on board when start the system
 read_initial_pulses()

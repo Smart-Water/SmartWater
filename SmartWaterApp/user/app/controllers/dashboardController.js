@@ -1,38 +1,39 @@
-app.controller('DashboardCtrl', function($scope, $http, $rootScope, $location,$cookies)
+app.controller('DashboardCtrl', function($scope, $http, $rootScope, $location, $cookies)
 {
   $rootScope.activetab = $location.path();
   $rootScope.pageTitle = 'Welcome';
+
   userCPF = $cookies.get('userCPF');
 
   //set charts
-  setCharts($scope,$http, userCPF);
+  setCharts($scope, $http, userCPF);
 
   //set counters
-  setGeneralTotal($http,userCPF);
+  setGeneralTotal($rootScope, $http, userCPF);
   setMonthTotal($http,userCPF);
-
-
 });
 
-function setGeneralTotal($http, userCPF){
-  GeneralCounter = new FlipClock($('.generalTotal'), 0000000000, {
+function setGeneralTotal($rootScope, $http, userCPF){
+  GeneralCounter = new FlipClock($('.generalTotal'), 1000000000, {
     clockFace: 'Counter'
   });
   $http.get('../api/report/totalByUser/'+userCPF).success(function(data) {
     GeneralCounter.setValue(data.total);
+    $rootScope.lastUpdate = data.last_update;
   });
 
   setTimeout(function() {
     setInterval(function() {
       $http.get('../api/report/totalByUser/'+userCPF).success(function(data) {
         GeneralCounter.setValue(data.total);
+        $rootScope.lastUpdate = data.last_update;
       });
     }, 10000);
   });
 }
 
 function setMonthTotal($http, userCPF){
-  monthCounter = new FlipClock($('.monthTotal'), 0000000000, {
+  monthCounter = new FlipClock($('.monthTotal'), 1000000000, {
     clockFace: 'Counter'
   });
   $http.get('../api/report/monthTotalByUser/'+userCPF).success(function(data) {
@@ -46,8 +47,7 @@ function setMonthTotal($http, userCPF){
       });
     }, 10000);
   });
-}
-
+};
 
 function setCharts($scope,$http, userCPF){
   $http.get('../api/report/lastYear/'+userCPF).success(function(months) {

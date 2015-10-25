@@ -7,8 +7,9 @@ require_once '../connection.php';
 $app = new \Slim\Slim();
 
 $app->get('/totalByUser/:cpf', function ($cpf)  {
-  $sql = "SELECT max(water_flow) as total from history h join boards b
-  on b.mac_address = h.mac_address where b.cpf_user=:cpf";
+  $sql = "SELECT max(water_flow) AS total, max(time_register) as last_update
+  FROM history h JOIN boards b on b.mac_address = h.mac_address
+  WHERE b.cpf_user=:cpf";
   try {
     $conn = new Connection();
     $db = $conn->getConnection();
@@ -197,30 +198,24 @@ $app->get('/lastYear/:cpf', function ($cpf)  {
   $data = new stdClass();
   $data->categories = array();
   $data->series = array();
-
   try {
     $conn = new Connection();
     $db = $conn->getConnection();
-
     $sql = "SELECT max(water_flow) as total from history h join boards b on
     b.mac_address = h.mac_address where b.cpf_user=:cpf
     and extract(MONTH FROM time_register) =:month and extract(YEAR FROM time_register) =:year";
-
     for ($i=13; $i > 0; $i--) {
       $year = date('Y', strtotime( -$i.' month'));
       $month = date('m', strtotime( -$i.' month'));
-
       $stmt = $db->prepare($sql);
       $stmt->bindParam("cpf",$cpf);
       $stmt->bindParam("month",$month);
       $stmt->bindParam("year",$year);
       $stmt->execute();
       $result = $stmt->fetchObject();
-
       if($result->total == null){
         $result->total = 0;
       }
-
       if($i == 13){
         $lastTotal = $result->total;
       }else{
@@ -231,9 +226,25 @@ $app->get('/lastYear/:cpf', function ($cpf)  {
       }
     }
     $db = null;
-
     echo json_encode($data);
+  } catch(PDOException $e) {
+    echo '{"error":{"text":'. $e->getMessage() .'}}';
+  }
+});
 
+$app->get('/getMonthsByUser/:cpf', function ($cpf)  {
+  $sql = "SELECT extract(month from time_register) as month, extract(year from time_register) as year
+  FROM history h JOIN boards b on b.mac_address = h.mac_address WHERE b.cpf_user=:cpf
+  group by month, year order by month, year";
+  try {
+    $conn = new Connection();
+    $db = $conn->getConnection();
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam("cpf", $cpf);
+    $stmt->execute();
+    $months =  $stmt->fetchAll(PDO::FETCH_OBJ);
+    $db = null;
+    echo json_encode($months);
   } catch(PDOException $e) {
     echo '{"error":{"text":'. $e->getMessage() .'}}';
   }

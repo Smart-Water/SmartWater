@@ -6,22 +6,50 @@ app.controller('reportDailyCtrl', function($scope, $http, $rootScope, $location,
 
   userCPF = $cookies.get('userCPF');
 
-  //set charts
-  setCharts($scope,$http, userCPF);
+  //populate the select with all monhts that register
+  listMonths($rootScope, $http, userCPF);
+
+  //set charts with current month
+  var time = new Date();
+  setCharts($rootScope, $http, userCPF, time.getFullYear(), time.getMonth()+1);
+
+  $scope.updateCharts = function() {
+    var monthYear = $scope.selectedMonth.split("/");
+    setCharts($rootScope, $http, userCPF, monthYear[1], monthYear[0]);
+  }
 
 });
 
-function setCharts($scope,$http, userCPF){
-  month = "October 2015"
-  $http.get('../api/report/daily/'+userCPF+"/2015/10").success(function(months) {
+function listMonths($rootScope, $http, userCPF) {
+  var monthNames = ["","January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"];
 
-    $scope.dailyCharts = {
+  var months = [];
+
+  $http.get('../api/report/getMonthsByUser/'+userCPF).success(function(data) {
+    for (var i in data){
+      months.push({'value' : data[i].month+"/"+data[i].year, 'description' : monthNames[data[i].month]+" "+data[i].year});
+    }
+    //setCharts($rootScope, $http, )
+    $rootScope.months = months;
+  });
+}
+
+function setCharts($rootScope, $http, userCPF, year, month){
+  var monthNames = ["","January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+  ];
+
+  monthTitle = monthNames[month] +" "+year;
+  $http.get('../api/report/daily/'+userCPF+"/"+year+"/"+month).success(function(months) {
+
+    $rootScope.dailyCharts = {
       options: {
         title: {
           text: 'Daily consumption'
         },
         subtitle: {
-          text: month
+          text: monthTitle
         }
       },
       xAxis: {
