@@ -3,7 +3,7 @@ app.controller('DashboardCtrl', function($scope, $http, $rootScope, $location, $
   $rootScope.activetab = $location.path();
   $rootScope.pageTitle = 'Welcome';
 
-  userCPF = $cookies.get('userCPF');
+  var userCPF = $cookies.get('userCPF');
 
   //set charts
   setCharts($scope, $http, userCPF);
@@ -49,24 +49,24 @@ function setMonthTotal($http, userCPF){
   });
 };
 
-function setCharts($scope,$http, userCPF){
+function setCharts($scope, $http, userCPF){
   $http.get('../api/report/lastYear/'+userCPF).success(function(months) {
     $scope.monthCharts = {
         options: {
           chart: {
               type: 'column'
+          },
+          title: {
+            text: 'Consumption per month'
+          },
+          subtitle: {
+            text: 'Last 12 months'
           }
-        },
-        title: {
-          text: 'Consumption per month'
-        },
-        subtitle: {
-          text: 'Last 12 months'
         },
         xAxis: {
           categories: months.categories,
           crosshair: true
-        },
+       },
         yAxis: {
           min: 0,
           title: {
@@ -88,7 +88,7 @@ function setCharts($scope,$http, userCPF){
           }
         },
         series: [{
-          name: 'Water',
+          name: 'Water (Liters)',
           data: months.series
         }]
       }

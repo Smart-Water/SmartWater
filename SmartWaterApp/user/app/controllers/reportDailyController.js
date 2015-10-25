@@ -11,11 +11,11 @@ app.controller('reportDailyCtrl', function($scope, $http, $rootScope, $location,
 
   //set charts with current month
   var time = new Date();
-  setCharts($rootScope, $http, userCPF, time.getFullYear(), time.getMonth()+1);
+  setDailyCharts($rootScope, $http, userCPF, time.getFullYear(), time.getMonth()+1);
 
   $scope.updateCharts = function() {
     var monthYear = $scope.selectedMonth.split("/");
-    setCharts($rootScope, $http, userCPF, monthYear[1], monthYear[0]);
+    setDailyCharts($rootScope, $http, userCPF, monthYear[1], monthYear[0]);
   }
 
 });
@@ -30,12 +30,11 @@ function listMonths($rootScope, $http, userCPF) {
     for (var i in data){
       months.push({'value' : data[i].month+"/"+data[i].year, 'description' : monthNames[data[i].month]+" "+data[i].year});
     }
-    //setCharts($rootScope, $http, )
     $rootScope.months = months;
   });
 }
 
-function setCharts($rootScope, $http, userCPF, year, month){
+function setDailyCharts($rootScope, $http, userCPF, year, month){
   var monthNames = ["","January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
   ];
