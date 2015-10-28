@@ -59,22 +59,34 @@ function setDailyCharts($rootScope, $http, userCPF, year, month){
         min: 0,
         title: {
           text: 'Flow (Liters)'
-        }
-      },
+        },
+        plotLines: [{
+            label: {
+                text: 'Average (' + months.average.toFixed(3) + ' liters)',
+                align: 'left'
+                },
+                dashStyle: 'dash',
+                color: 'green',
+                value: months.average,
+                width: '2',
+                zIndex: 2
+        }]
+	  },
       tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-        '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-      },
-      plotOptions: {
-        column: {
-          pointPadding: 0.2,
-          borderWidth: 0
-        }
-      },
+			headerFormat: '<span style="font-size:10px">Day {point.key}</span><table>',
+			pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+			'<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+			footerFormat: '</table>',
+			shared: true,
+			useHTML: true,
+			valueSuffix: 'liters'
+	  },
+	  plotOptions: {
+			column: {
+				pointPadding: 0.2,
+				borderWidth: 0
+			}
+	  },
       series: [{
         name: 'Water',
         data: months.series

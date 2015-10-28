@@ -50,7 +50,7 @@ function setMonthTotal($http, userCPF){
 };
 
 function setCharts($scope, $http, userCPF){
-  $http.get('../api/report/lastYear/'+userCPF).success(function(months) {
+  $http.get('../api/report/lastYear/'+userCPF).success(function(days) {
     $scope.monthCharts = {
         options: {
           chart: {
@@ -64,22 +64,35 @@ function setCharts($scope, $http, userCPF){
           }
         },
         xAxis: {
-          categories: months.categories,
+          categories: days.categories,
           crosshair: true
        },
         yAxis: {
-          min: 0,
-          title: {
-            text: 'Flow (Liters)'
-          }
+        min: 0,
+        title: {
+          text: 'Flow (Liters)'
         },
+        plotLines: [{
+            label: {
+                text: 'Average (' + days.average.toFixed(3) + ' liters)',
+                align: 'left'
+                },
+                dashStyle: 'dash',
+                color: 'green',
+                value: days.average,
+                width: '2',
+                zIndex: 2
+        }]
+	  },
+		
         tooltip: {
           headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
           pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
           '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
           footerFormat: '</table>',
           shared: true,
-          useHTML: true
+          useHTML: true,
+		  valueSuffix: 'liters'
         },
         plotOptions: {
           column: {
@@ -89,7 +102,7 @@ function setCharts($scope, $http, userCPF){
         },
         series: [{
           name: 'Water (Liters)',
-          data: months.series
+          data: days.series
         }]
       }
 

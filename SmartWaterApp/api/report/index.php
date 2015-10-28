@@ -165,7 +165,8 @@ $app->get('/daily/:cpf/:year/:month', function ($cpf,$year,$month)  {
     b.mac_address = h.mac_address where b.cpf_user=:cpf and extract(DAY FROM time_register) =:day
     and extract(MONTH FROM time_register) =:month and extract(YEAR FROM time_register) =:year";
 
-    $lastDay = date("t", mktime(0,0,0,$month,'01',$year)); // get the last day from month
+	$totalAverage = 0;
+	$lastDay = date("t", mktime(0,0,0,$month,'01',$year)); // get the last day from month
     for ($day=1; $day <= $lastDay; $day++) {
 
       $stmt = $db->prepare($sql);
@@ -181,12 +182,16 @@ $app->get('/daily/:cpf/:year/:month', function ($cpf,$year,$month)  {
 
       $total = $result->total - $lastTotal;
       $lastTotal = $result->total;
+	  $totalAverage += $total;
       array_push($data->categories, $day);
       array_push($data->series, $total);
 
     }
     $db = null;
 
+	$avg = $totalAverage/sizeof($data->series);
+	$data->average = $avg;
+	
     echo json_encode($data);
 
   } catch(PDOException $e) {
@@ -204,6 +209,8 @@ $app->get('/lastYear/:cpf', function ($cpf)  {
     $sql = "SELECT max(water_flow) as total from history h join boards b on
     b.mac_address = h.mac_address where b.cpf_user=:cpf
     and extract(MONTH FROM time_register) =:month and extract(YEAR FROM time_register) =:year";
+	
+	$totalAverage = 0;
     for ($i=13; $i > 0; $i--) {
       $year = date('Y', strtotime( -$i.' month'));
       $month = date('m', strtotime( -$i.' month'));
@@ -221,11 +228,16 @@ $app->get('/lastYear/:cpf', function ($cpf)  {
       }else{
         $total = $result->total - $lastTotal;
         $lastTotal = $result->total;
+		$totalAverage += $total;
         array_push($data->categories, date('M-Y', strtotime( -$i.' month')));
         array_push($data->series, $total);
       }
     }
     $db = null;
+	
+	$avg = $totalAverage/sizeof($data->series);
+	$data->average = $avg;
+	
     echo json_encode($data);
   } catch(PDOException $e) {
     echo '{"error":{"text":'. $e->getMessage() .'}}';
