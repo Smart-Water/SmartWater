@@ -11,7 +11,7 @@ app.controller('DashboardCtrl', function($http, $rootScope, $location,$cookies)
 });
 
 function setGeneralTotal($http){
-  generalCounter = new FlipClock($('.generalTotal'), 1, {
+  generalCounter = new FlipClock($('.generalTotal'), 1000000000, {
     clockFace: 'Counter'
   });
   $http.get('../api/report/generalAllUsers/').success(function(data) {
@@ -28,7 +28,7 @@ function setGeneralTotal($http){
 }
 
 function setGeneralTotalYear($http){
-  generalTotalYearCounter = new FlipClock($('.generalTotalYear'), 1, {
+  generalTotalYearCounter = new FlipClock($('.generalTotalYear'), 1000000000, {
     clockFace: 'Counter'
   });
   $http.get('../api/report/totalAllUsers/').success(function(data) {
@@ -45,7 +45,7 @@ function setGeneralTotalYear($http){
 }
 
 function setMonthTotal($http){
-  monthCounter = new FlipClock($('.monthTotal'), 1, {
+  monthCounter = new FlipClock($('.monthTotal'), 1000000000, {
     clockFace: 'Counter'
   });
   $http.get('../api/report/monthTotalAllUsers/').success(function(data) {

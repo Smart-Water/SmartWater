@@ -33,7 +33,9 @@
             <a href="" title="Report by User"><span class="glyphicon glyphicon-file" aria-hidden="true"></span></a>
             <a href="" title="Total Consumption"><span class="glyphicon glyphicon-file" aria-hidden="true"></span></a>
         </td>
-        <td><a href=""><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
+        <td><a href="#/editUser/{{user.cpf}}" ng-class="{active: activetab == '/listUser'}"
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+		</td>
         <td><a href="" ng-click="confirmDelete(user)">
           <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
       </tr>

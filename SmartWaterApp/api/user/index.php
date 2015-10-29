@@ -106,15 +106,14 @@ $app->post('/', function () {
   }
 });
 
-$app->put('/:cpf', function ($cpf) {
+$app->put('/:cpf', function ($old_cpf) {
   $request = \Slim\Slim::getInstance()->request();
   $body = $request->getBody();
   $user = json_decode($body);
-  $user->cpf = $cpf;
 
-  $sql = "UPDATE users SET name=:name, address=:address, city=:city, state_city=:state_city,
+  $sql = "UPDATE users SET cpf=:cpf,name=:name, address=:address, city=:city, state_city=:state_city,
           country=:country, password=:password, email=:email, number_of_residents=:number_of_residents,
-          access_level=:access_level WHERE cpf=:cpf";
+          access_level=:access_level WHERE cpf=:old_cpf";
   try {
     $conn = new Connection();
     $db = $conn->getConnection();
@@ -130,6 +129,7 @@ $app->put('/:cpf', function ($cpf) {
     $stmt->bindParam("email", $user->email);
     $stmt->bindParam("number_of_residents", $user->number_of_residents);
     $stmt->bindParam("access_level", $user->access_level);
+    $stmt->bindParam("old_cpf", $old_cpf);
     $stmt->execute();
     $db = null;
     echo json_encode($user);

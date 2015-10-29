@@ -16,7 +16,7 @@
   function AddCtrl($scope, $http, $location) {
     $scope.master = {};
     $scope.activePath = null;
-    $scope.add_new = function(user, board, formUser) {
+    $scope.submit_form = function(user, board, formUser) {
       tempString = user.zip_code;
       user.zip_code = tempString.replace("-","").replace("/","").replace(".","");
       if(user.access_level==2){

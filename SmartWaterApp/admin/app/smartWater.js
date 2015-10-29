@@ -24,14 +24,14 @@ app.config(function($routeProvider, $locationProvider)
      controller  : 'UserListCtrl',
    })
 
-   .when('/listUser/:cpf', {
-     templateUrl : 'app/views/listUser.html',
-     controller  : 'UserListCtrl',
-   })
-
    .when('/detailsUser/:cpf', {
      templateUrl : 'app/views/detailsUser.html',
      controller  : 'DetailsUserCtrl',
+   })
+   
+   .when('/editUser/:cpf', {
+     templateUrl : 'app/views/user.html',
+     controller  : 'EditUserCtrl',
    })
 
    .when('/about', {

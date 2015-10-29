@@ -192,6 +192,7 @@
       <script src="app/smartWater.js" charset="utf-8"></script>
       <script src="app/controllers/dashboardController.js" charset="utf-8"></script>
       <script src="app/controllers/addUserController.js" charset="utf-8"></script>
+      <script src="app/controllers/editUserController.js" charset="utf-8"></script>
       <script src="app/controllers/listUserController.js" charset="utf-8"></script>
       <script src="app/controllers/detailsUserController.js" charset="utf-8"></script>
       <script src="app/controllers/aboutController.js" charset="utf-8"></script>

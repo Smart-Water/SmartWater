@@ -73,13 +73,13 @@ $app->post('/', function () {
   }
 });
 
-$app->put('/:mac_address', function ($mac_address) {
+$app->put('/:mac_address', function ($old_mac_address) {
   $request = \Slim\Slim::getInstance()->request();
   $body = $request->getBody();
   $board = json_decode($body);
-  $board->mac_address = $mac_address;
+  //$board->mac_address = $old_mac_address;
 
-  $sql = "UPDATE boards SET cpf_user=:cpf_user WHERE mac_address=:mac_address";
+  $sql = "UPDATE boards SET mac_address=:mac_address,cpf_user=:cpf_user WHERE mac_address=:old_mac_address";
   try {
     $conn = new Connection();
     $db = $conn->getConnection();
@@ -87,6 +87,7 @@ $app->put('/:mac_address', function ($mac_address) {
     $stmt = $db->prepare($sql);
     $stmt->bindParam("mac_address", $board->mac_address);
     $stmt->bindParam("cpf_user", $board->cpf_user);
+    $stmt->bindParam("old_mac_address", $old_mac_address);
     $stmt->execute();
     $db = null;
     echo json_encode($board);
