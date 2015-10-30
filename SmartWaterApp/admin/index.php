@@ -198,6 +198,8 @@
       <script src="app/controllers/aboutController.js" charset="utf-8"></script>
       <script src="app/controllers/logoutController.js" charset="utf-8"></script>
       <script src="app/controllers/changePasswordController.js" charset="utf-8"></script>
+	  <script src="app/controllers/userGeneralReportController.js" charset="utf-8"></script>
+	  
       <script src="app/controllers/report1Controller.js" charset="utf-8"></script>
       <script src="app/controllers/report2Controller.js" charset="utf-8"></script>
       <script src="app/controllers/report3Controller.js" charset="utf-8"></script>

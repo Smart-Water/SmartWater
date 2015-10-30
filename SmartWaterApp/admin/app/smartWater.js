@@ -44,6 +44,21 @@ app.config(function($routeProvider, $locationProvider)
      controller  : 'changePasswordCtrl',
    })
 
+   .when('/userGeneralReport/:cpf', {
+     templateUrl : 'app/views/userGeneralReport.html',
+     controller  : 'userGeneralReportCtrl',
+   })
+
+   .when('/userLastMonthsReport/:cpf', {
+     templateUrl : 'app/views/userLastMonthsReport.html',
+     controller  : 'lastMonthsReportCtrl',
+   })
+
+   .when('/userDailyReport/:cpf', {
+     templateUrl : 'app/views/userDailyReport.html',
+     controller  : 'userDailyReportCtrl',
+   })
+   
    .when('/report1', {
      templateUrl : 'app/views/report1.html',
      controller  : 'report1Ctrl',

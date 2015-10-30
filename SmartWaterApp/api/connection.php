@@ -2,15 +2,12 @@
 
 class Connection{
 
-  //private static $host = "tcciotunivas.cfg3cjbv2ytb.sa-east-1.rds.amazonaws.com";
-  //private static $db_name = "smartwater";
-  //private static $user = "iotunivas";
-  //private static $password = "bdtccunivas";
 
-  private static $host = "localhost";
-  private static $db_name = "smartwater";
-  private static $user = "postgres";
-  private static $password = "database";
+  //define variables for connection
+  private static $host = "";
+  private static $db_name = "";
+  private static $user = "";
+  private static $password = "";
 
   public function getConnection()
   {

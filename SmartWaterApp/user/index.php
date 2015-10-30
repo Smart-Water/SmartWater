@@ -79,10 +79,7 @@
                            <a role="menuitem" tabindex="-1" href="#/daily">Daily</a>
                         </li>
                         <li role="presentation" ng-class="{active: activetab == '/report2'}">
-                           <a role="menuitem" tabindex="-1" href="#/report2">Report 2</a>
-                        </li>
-                        <li role="presentation" ng-class="{active: activetab == '/report3'}">
-                           <a role="menuitem" tabindex="-1" href="#/report3">Report 3</a>
+                           <a role="menuitem" tabindex="-1" href="#/perResident">Per Resident</a>
                         </li>
                      </ul>
                   </li>
@@ -131,12 +128,6 @@
                         User Info
                         </a>
                      </li>
-                     <!--<li ng-class="{active: activetab == '/addUser'}">
-                        <a href="#/addUser">
-                        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
-                        Add new
-                        </a>
-                     </li>!-->
                   </ul>
                   <li class="item-sidebar collapsed" >
                      <a href=""  data-toggle="collapse" data-target="#sub-menu-reports" data-parent="#sidebar">
@@ -150,10 +141,7 @@
                         <a href="#/daily">Daily</a>
                      </li>
                      <li ng-class="{active: activetab == '/report2'}">
-                        <a href="#/report2">Report 2</a>
-                     </li>
-                     <li ng-class="{active: activetab == '/report3'}">
-                        <a href="#/report3">Report 3</a>
+                        <a href="#/perResident">Per Resident</a>
                      </li>
                   </ul>
                </ul>
