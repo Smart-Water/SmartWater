@@ -1,4 +1,4 @@
-var app = angular.module('smartWater',['ngRoute', 'ngMessages','ui.mask','ngCookies']);
+var app = angular.module('smartWater',['ngRoute', 'ngMessages','ui.mask','ngCookies', 'highcharts-ng']);
 
 app.config(function($routeProvider, $locationProvider)
 {
@@ -28,7 +28,7 @@ app.config(function($routeProvider, $locationProvider)
      templateUrl : 'app/views/detailsUser.html',
      controller  : 'DetailsUserCtrl',
    })
-   
+
    .when('/editUser/:cpf', {
      templateUrl : 'app/views/user.html',
      controller  : 'EditUserCtrl',
@@ -51,14 +51,14 @@ app.config(function($routeProvider, $locationProvider)
 
    .when('/userLastMonthsReport/:cpf', {
      templateUrl : 'app/views/userLastMonthsReport.html',
-     controller  : 'lastMonthsReportCtrl',
+     controller  : 'userLastMonthsReportCtrl',
    })
 
    .when('/userDailyReport/:cpf', {
      templateUrl : 'app/views/userDailyReport.html',
      controller  : 'userDailyReportCtrl',
    })
-   
+
    .when('/report1', {
      templateUrl : 'app/views/report1.html',
      controller  : 'report1Ctrl',

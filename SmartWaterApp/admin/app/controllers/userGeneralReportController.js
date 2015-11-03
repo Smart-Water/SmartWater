@@ -1,34 +1,25 @@
 app.controller('userGeneralReportCtrl', function($scope, $http, $rootScope, $location, $routeParams)
 {
-	
    $rootScope.activetab = $location.path();
-   $http.get('../api/user/'+$routeParams.cpf).success(function(data) {
-		 user = angular.copy(data);
-		 console.log(user);
-   });
-     
+
+   userCPF = $routeParams.cpf;
    $rootScope.pageTitle = 'General Report';
-   $rootScope.message = 'This graphic presents the general total consumption of water by ';
-   
+   $http.get('../api/user/'+userCPF).success(function(data) {
+     $rootScope.message = 'This graphic presents the general total consumption of water for '+data.name;
+   });
+
 	//set counters
-	setGeneralTotal($rootScope, $http, $routeParams.cpf);
-	setMonthTotal($http,$routeParams.cpf);
-	
-	if(typeof timeoutGeneralTotal === 'undefined'){
-		setGeneralTotal($rootScope, $http, $routeParams.cpf);
-		setMonthTotal($http,$routeParams.cpf);	
-	}else{
-		clearTimeout(timeoutGeneralTotal);
-		clearTimeout(timeoutMonthTotal);
-		setGeneralTotal($rootScope, $http, $routeParams.cpf);
-		setMonthTotal($http,$routeParams.cpf);	
-	}
-	
-	
+	setUserGeneralTotal($rootScope, $http, userCPF);
+	setUserMonthTotal($http, userCPF);
+
 });
 
 
-function setGeneralTotal($rootScope, $http, userCPF){
+function setUserGeneralTotal($rootScope, $http, userCPF){
+  if(typeof timeoutGeneralTotal !=='undefined'){
+    window.clearInterval(intervalGeneralCounter);
+    window.clearTimeout(timeoutGeneralTotal);
+  }
   GeneralCounter = new FlipClock($('.userGeneralTotal'), 1000000000, {
     clockFace: 'Counter'
   });
@@ -36,9 +27,8 @@ function setGeneralTotal($rootScope, $http, userCPF){
     GeneralCounter.setValue(data.total);
     $rootScope.lastUpdate = data.last_update;
   });
-
-  var timeoutGeneralTotal = setTimeout(function() {
-    setInterval(function() {
+  timeoutGeneralTotal = setTimeout(function() {
+    intervalGeneralCounter = setInterval(function() {
       $http.get('../api/report/totalByUser/'+userCPF).success(function(data) {
         GeneralCounter.setValue(data.total);
         $rootScope.lastUpdate = data.last_update;
@@ -47,16 +37,19 @@ function setGeneralTotal($rootScope, $http, userCPF){
   });
 }
 
-function setMonthTotal($http, userCPF){
+function setUserMonthTotal($http, userCPF){
+  if(typeof timeoutMonthTotal !=='undefined'){
+    window.clearInterval(intervalMonthCounter);
+    window.clearTimeout(timeoutMonthTotal);
+  }
   monthCounter = new FlipClock($('.userMonthTotal'), 1000000000, {
     clockFace: 'Counter'
   });
   $http.get('../api/report/monthTotalByUser/'+userCPF).success(function(data) {
     monthCounter.setValue(data.total);
   });
-
-  var timeoutMonthTotal = setTimeout(function() {
-    setInterval(function() {
+  timeoutMonthTotal = setTimeout(function() {
+    intervalMonthCounter = setInterval(function() {
       $http.get('../api/report/monthTotalByUser/'+userCPF).success(function(data) {
         monthCounter.setValue(data.total);
       });
