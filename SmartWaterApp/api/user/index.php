@@ -14,6 +14,13 @@ $app->get('/', function ()  {
     $stmt = $db->query($sql);
     $users = $stmt->fetchAll(PDO::FETCH_OBJ);
     $db = null;
+	
+	//add zero to left in cpf field in all object
+	foreach ($users as &$user) {
+		$user->cpf = str_pad($user->cpf, 11, "0", STR_PAD_LEFT);
+	}
+	unset($user);
+	
     echo json_encode($users);
   } catch(PDOException $e) {
     echo '{"error":{"text":'. $e->getMessage() .'}}';
@@ -28,6 +35,13 @@ $app->get('/users/', function ()  {
     $stmt = $db->query($sql);
     $users = $stmt->fetchAll(PDO::FETCH_OBJ);
     $db = null;
+	
+	//add zero to left in cpf field in all object
+	foreach ($users as &$user) {
+		$user->cpf = str_pad($user->cpf, 11, "0", STR_PAD_LEFT);
+	}
+	unset($user);
+
     echo json_encode($users);
   } catch(PDOException $e) {
     echo '{"error":{"text":'. $e->getMessage() .'}}';
@@ -44,6 +58,8 @@ $app->get('/:cpf', function ($cpf)  {
     $stmt->execute();
     $user = $stmt->fetchObject();
     $db = null;
+	//add zero to left in cpf field
+	$user->cpf = str_pad($user->cpf, 11, "0", STR_PAD_LEFT);
     echo json_encode($user);
   } catch(PDOException $e) {
     echo '{"error":{"text":'. $e->getMessage() .'}}';
