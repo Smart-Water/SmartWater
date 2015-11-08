@@ -12,7 +12,7 @@ app.controller('EditUserCtrl', function($scope,$http,$rootScope,$location,$route
   });
 
   EditCtrl($scope, $routeParams, $http, $location);
-
+  
 });
 
 function ListAccessLevels($scope, $http) {

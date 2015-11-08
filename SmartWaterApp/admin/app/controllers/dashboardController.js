@@ -1,13 +1,13 @@
 app.controller('DashboardCtrl', function($http, $rootScope, $location,$cookies)
 {
-   $rootScope.activetab = $location.path();
-     $rootScope.pageTitle = 'Welcome';
-     userCPF = $cookies.get('userCPF');
+  $rootScope.activetab = $location.path();
+  $rootScope.pageTitle = 'Welcome';
+  userCPF = $cookies.get('userCPF');
 
-     //set counters
-     setGeneralTotal($http);
-     setGeneralTotalYear($http);
-     setMonthTotal($http);
+  //set counters
+  setGeneralTotal($http);
+  setGeneralTotalYear($http);
+  setMonthTotal($http);
 });
 
 function setGeneralTotal($http){
@@ -19,12 +19,12 @@ function setGeneralTotal($http){
   });
 
   setTimeout(function() {
-		setInterval(function() {
+    setInterval(function() {
       $http.get('../api/report/generalAllUsers/').success(function(data) {
         generalCounter.setValue(data.total);
       });
-		}, 10000);
-	});
+    }, 10000);
+  });
 }
 
 function setGeneralTotalYear($http){
@@ -36,12 +36,12 @@ function setGeneralTotalYear($http){
   });
 
   setTimeout(function() {
-		setInterval(function() {
+    setInterval(function() {
       $http.get('../api/report/totalAllUsers/').success(function(data) {
         generalTotalYearCounter.setValue(data.total);
       });
-		}, 10000);
-	});
+    }, 10000);
+  });
 }
 
 function setMonthTotal($http){
@@ -53,10 +53,10 @@ function setMonthTotal($http){
   });
 
   setTimeout(function() {
-		setInterval(function() {
+    setInterval(function() {
       $http.get('../api/report/monthTotalAllUsers/').success(function(data) {
         monthCounter.setValue(data.total);
       });
-		}, 10000);
-	});
+    }, 10000);
+  });
 }

@@ -24,6 +24,37 @@ $app->get('/totalByUser/:cpf', function ($cpf)  {
   }
 });
 
+$app->get('/perResidentByUser/:cpf', function ($cpf)  {
+  $result = new stdClass();
+  $sql = "SELECT * FROM users WHERE cpf = :cpf";
+  try {
+    $conn = new Connection();
+    $db = $conn->getConnection();
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam("cpf", $cpf);
+    $stmt->execute();
+    $user = $stmt->fetchObject();
+
+    $sql = "SELECT max(water_flow) AS total, max(time_register) as last_update
+    FROM history h JOIN boards b on b.mac_address = h.mac_address
+    WHERE b.cpf_user=:cpf";
+    $stmt = $db->prepare($sql);
+    $stmt->bindParam("cpf", $cpf);
+    $stmt->execute();
+    $total = $stmt->fetchObject();
+
+    $result->residents = $user->number_of_residents;
+    $result->totalPerResident = ($total->total/$user->number_of_residents);
+    $result->total = $total->total;
+    $result->lastUpdate = $total->last_update;
+
+    $db = null;
+    echo json_encode($result);
+  } catch(PDOException $e) {
+    echo '{"error":{"text":'. $e->getMessage() .'}}';
+  }
+});
+
 $app->get('/monthTotalByUser/:cpf', function ($cpf)  {
   try {
     $conn = new Connection();
@@ -106,8 +137,9 @@ $app->get('/monthTotalAllUsers/', function ()  {
     $stmt->execute();
     $yearTotal = $stmt->fetchObject();
 
-    $sql = "SELECT sum(max) as total from (SELECT max(water_flow) from history where extract(MONTH FROM time_register)=:month
-    and extract(YEAR FROM time_register)=:year group by history.mac_address) as totalwater";
+    $sql = "SELECT sum(max) as total from (SELECT max(water_flow) from history
+    where extract(MONTH FROM time_register)=:month and extract(YEAR FROM time_register)=:year
+    group by history.mac_address) as totalwater";
 
     $month = date('m',strtotime('-1 month'));
     if($month == 12) {
@@ -199,6 +231,75 @@ $app->get('/daily/:cpf/:year/:month', function ($cpf,$year,$month)  {
   }
 });
 
+$app->get('/dailyAllUsers/:year/:month', function ($year,$month)  {
+  $data = new stdClass();
+  $data->categories = array();
+  $data->series = array();
+
+  try {
+    $conn = new Connection();
+    $db = $conn->getConnection();
+
+    //Get total for previous month
+    $sql = "SELECT sum(total) as total FROM (SELECT max(h.water_flow) as total,
+    h.mac_address as mac FROM history h JOIN boards b ON b.mac_address = h.mac_address
+    WHERE extract(MONTH FROM time_register) =:month and extract(YEAR FROM time_register) =:year
+    group by mac) as totalMonth";
+
+    $stmt = $db->prepare($sql);
+
+    $previousMonth = $month -1;
+    $stmt->bindParam("month",$previousMonth);
+    if($previousMonth == 12) {
+      $stmt->bindParam("year",$year-1);
+    }else{
+      $stmt->bindParam("year",$year);
+    }
+    $stmt->execute();
+    $result = $stmt->fetchObject();
+    if($result->total == null){
+      $result->total = 0;
+    }
+
+    $lastTotal = $result->total;
+
+    $sql = "SELECT sum(total) as total FROM (SELECT max(h.water_flow) AS total, h.mac_address AS mac
+    FROM history h JOIN boards b ON b.mac_address = h.mac_address WHERE extract(DAY FROM time_register) =:day
+    AND extract(MONTH FROM time_register) =:month AND extract(YEAR FROM time_register) =:year GROUP BY mac) as totalDay";
+
+    $totalAverage = 0;
+    $lastDay = date("t", mktime(0,0,0,$month,'01',$year)); // get the last day from month
+    for ($day=1; $day <= $lastDay; $day++) {
+
+      $stmt = $db->prepare($sql);
+      $stmt->bindParam("day",$day);
+      $stmt->bindParam("month",$month);
+      $stmt->bindParam("year",$year);
+      $stmt->execute();
+      $result = $stmt->fetchObject();
+      if($result->total == null){
+        $result->total = $lastTotal;
+      }
+
+      $total = $result->total - $lastTotal;
+      $lastTotal = $result->total;
+      $totalAverage += $total;
+      array_push($data->categories, $day);
+      array_push($data->series, $total);
+
+    }
+    $db = null;
+
+    $avg = $totalAverage/sizeof($data->series);
+    $data->average = $avg;
+
+    echo json_encode($data);
+
+  } catch(PDOException $e) {
+    echo '{"error":{"text":'. $e->getMessage() .'}}';
+  }
+});
+
 $app->get('/lastYear/:cpf', function ($cpf)  {
   $data = new stdClass();
   $data->categories = array();
@@ -244,6 +345,51 @@ $app->get('/lastYear/:cpf', function ($cpf)  {
   }
 });
 
+$app->get('/lastYearAllUser/', function ()  {
+  $data = new stdClass();
+  $data->categories = array();
+  $data->series = array();
+  try {
+    $conn = new Connection();
+    $db = $conn->getConnection();
+    $sql = "SELECT sum(total) as total FROM (SELECT max(h.water_flow) as total,
+    h.mac_address as mac FROM history h JOIN boards b ON b.mac_address = h.mac_address
+    WHERE extract(MONTH FROM time_register) =:month and extract(YEAR FROM time_register) =:year
+    group by mac) as totalMonth";
+
+    $totalAverage = 0;
+    for ($i=13; $i > 0; $i--) {
+      $year = date('Y', strtotime( -$i.' month'));
+      $month = date('m', strtotime( -$i.' month'));
+      $stmt = $db->prepare($sql);
+      $stmt->bindParam("month",$month);
+      $stmt->bindParam("year",$year);
+      $stmt->execute();
+      $result = $stmt->fetchObject();
+      if($result->total == null){
+        $result->total = 0;
+      }
+      if($i == 13){
+        $lastTotal = $result->total;
+      }else{
+        $total = $result->total - $lastTotal;
+        $lastTotal = $result->total;
+        $totalAverage += $total;
+        array_push($data->categories, date('M-Y', strtotime( -$i.' month')));
+        array_push($data->series, $total);
+      }
+    }
+    $db = null;
+
+    $avg = $totalAverage/sizeof($data->series);
+    $data->average = $avg;
+
+    echo json_encode($data);
+  } catch(PDOException $e) {
+    echo '{"error":{"text":'. $e->getMessage() .'}}';
+  }
+});
+
 $app->get('/getMonthsByUser/:cpf', function ($cpf)  {
   $sql = "SELECT extract(month from time_register) as month, extract(year from time_register) as year
   FROM history h JOIN boards b on b.mac_address = h.mac_address WHERE b.cpf_user=:cpf
@@ -261,5 +407,22 @@ $app->get('/getMonthsByUser/:cpf', function ($cpf)  {
     echo '{"error":{"text":'. $e->getMessage() .'}}';
   }
 });
+
+$app->get('/getMonthsAllUsers/', function ()  {
+  $sql = "SELECT extract(month from time_register) as month, extract(year from time_register) as year
+  FROM history h JOIN boards b on b.mac_address = h.mac_address group by month, year order by month, year";
+  try {
+    $conn = new Connection();
+    $db = $conn->getConnection();
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $months =  $stmt->fetchAll(PDO::FETCH_OBJ);
+    $db = null;
+    echo json_encode($months);
+  } catch(PDOException $e) {
+    echo '{"error":{"text":'. $e->getMessage() .'}}';
+  }
+});
+
 
 $app->run();

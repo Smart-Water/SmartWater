@@ -1,16 +1,16 @@
 app.controller('userGeneralReportCtrl', function($scope, $http, $rootScope, $location, $routeParams)
 {
-   $rootScope.activetab = $location.path();
+  $rootScope.activetab = $location.path();
 
-   userCPF = $routeParams.cpf;
-   $rootScope.pageTitle = 'General Report';
-   $http.get('../api/user/'+userCPF).success(function(data) {
-     $rootScope.message = 'This graphic presents the general total consumption of water for '+data.name;
-   });
+  userCPF = $routeParams.cpf;
+  $rootScope.pageTitle = 'General Report';
+  $http.get('../api/user/'+userCPF).success(function(data) {
+    $rootScope.message = 'This graphic presents the general total consumption of water for '+data.name;
+  });
 
-	//set counters
-	setUserGeneralTotal($rootScope, $http, userCPF);
-	setUserMonthTotal($http, userCPF);
+  //set counters
+  setUserGeneralTotal($rootScope, $http, userCPF);
+  setUserMonthTotal($http, userCPF);
 
 });
 

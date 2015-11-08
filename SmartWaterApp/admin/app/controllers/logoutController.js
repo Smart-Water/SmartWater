@@ -3,5 +3,5 @@ function logout() {
 };
 
 function confirmLogout() {
-    window.location.href = '../session/sessionExit.php';
+  window.location.href = '../session/sessionExit.php';
 };

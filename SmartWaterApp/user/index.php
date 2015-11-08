@@ -180,15 +180,12 @@
       <!-- AngularJS scripts -->
       <script src="app/smartWater.js" charset="utf-8"></script>
       <script src="app/controllers/dashboardController.js" charset="utf-8"></script>
-      <!--<script src="app/controllers/addUserController.js" charset="utf-8"></script>!-->
-      <!--<script src="app/controllers/listUserController.js" charset="utf-8"></script>!-->
       <script src="app/controllers/detailsUserController.js" charset="utf-8"></script>
       <script src="app/controllers/aboutController.js" charset="utf-8"></script>
       <script src="app/controllers/logoutController.js" charset="utf-8"></script>
       <script src="app/controllers/changePasswordController.js" charset="utf-8"></script>
       <script src="app/controllers/reportDailyController.js" charset="utf-8"></script>
-      <script src="app/controllers/report2Controller.js" charset="utf-8"></script>
-      <script src="app/controllers/report3Controller.js" charset="utf-8"></script>
+      <script src="app/controllers/reportPerResidentController.js" charset="utf-8"></script>
 
    </body>
 </html>

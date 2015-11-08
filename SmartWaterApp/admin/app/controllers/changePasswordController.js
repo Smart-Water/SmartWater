@@ -24,7 +24,7 @@ app.controller('changePasswordCtrl', function($scope,$http,$rootScope,$location)
           } else {
             $scope.user.password = userNewPassword;
             $http.put('../api/user/password/',$scope.user).success(function(data){
-            $scope.user = data;
+              $scope.user = data;
               if($scope.user.password == userConfirmNewPassword) {
                 $scope.success = true;
                 $scope.successMessage = 'Success Change Password!';
@@ -40,5 +40,5 @@ app.controller('changePasswordCtrl', function($scope,$http,$rootScope,$location)
       $scope.error = true;
       $scope.errorMessage = 'New Password and Confirm New Password are different!';
     }
-};
+  };
 });

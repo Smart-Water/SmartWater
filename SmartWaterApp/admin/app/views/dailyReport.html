@@ -1,0 +1,13 @@
+<h1 class="page-header">{{pageTitle}}</h1>
+<p>{{message}}</p>
+
+<div class="form-group">
+  <div class="col-sm-3">
+    <label class="control-label" for="access_level">Select the Month:</label>
+    <select class="form-control" ng-model="selectedMonth" ng-change="updateChartsAllUsers()">
+      <option ng-repeat="month in months" value="{{month.value}}">{{month.description}}</option>
+    </select>
+  </div>
+</div>
+
+</br><highchart id="dailyChartsAllUser" config="dailyChartsAllUser"></highchart>
