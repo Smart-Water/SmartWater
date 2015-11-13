@@ -44,7 +44,7 @@ $app->get('/perResidentByUser/:cpf', function ($cpf)  {
     $total = $stmt->fetchObject();
 
     $result->residents = $user->number_of_residents;
-    $result->totalPerResident = ($total->total/$user->number_of_residents);
+    $result->totalPerResident = number_format(($total->total/$user->number_of_residents),3,'.', '');
     $result->total = $total->total;
     $result->lastUpdate = $total->last_update;
 

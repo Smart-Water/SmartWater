@@ -49,6 +49,8 @@ def get_current_time():
 def count_pulses(channel):
     global count
     count = count+1
+    #print "Pulses: %d" %(count)
+    #print "The flow is: %.3f Liters"% ((count * 2.25 / 1000))
 
 # The calback to convert the total of pulses in water flow.
 def calc_flow(pulses):

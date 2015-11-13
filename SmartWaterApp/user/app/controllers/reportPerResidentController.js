@@ -11,6 +11,10 @@ app.controller('reportPerResidentCtrl',  function($scope, $http, $rootScope, $lo
 });
 
 function setTotalPerResident($rootScope, $http, userCPF){
+  if(typeof totalPerResidentTimeout !=='undefined'){
+    window.clearInterval(totalPerResidentInterval);
+    window.clearTimeout(totalPerResidentTimeout);
+  }
   GeneralCounter = new FlipClock($('.totalPerResident'), 1000000000, {
     clockFace: 'Counter'
   });
@@ -20,8 +24,8 @@ function setTotalPerResident($rootScope, $http, userCPF){
     $rootScope.totalResidents = data.residents;
   });
 
-  setTimeout(function() {
-    setInterval(function() {
+  totalPerResidentTimeout = setTimeout(function() {
+    totalPerResidentInterval = setInterval(function() {
       $http.get('../api/report/perResidentByUser/'+userCPF).success(function(data) {
         GeneralCounter.setValue(data.totalPerResident);
         $rootScope.lastUpdate = data.lastUpdate;

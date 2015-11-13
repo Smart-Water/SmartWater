@@ -11,6 +11,10 @@ app.controller('DashboardCtrl', function($http, $rootScope, $location,$cookies)
 });
 
 function setGeneralTotal($http){
+  if(typeof generalTimeout !=='undefined'){
+    window.clearInterval(generalInterval);
+    window.clearTimeout(generalTimeout);
+  }
   generalCounter = new FlipClock($('.generalTotal'), 1000000000, {
     clockFace: 'Counter'
   });
@@ -18,8 +22,8 @@ function setGeneralTotal($http){
     generalCounter.setValue(data.total);
   });
 
-  setTimeout(function() {
-    setInterval(function() {
+  generalTimeout = setTimeout(function() {
+    generalInterval = setInterval(function() {
       $http.get('../api/report/generalAllUsers/').success(function(data) {
         generalCounter.setValue(data.total);
       });
@@ -28,6 +32,10 @@ function setGeneralTotal($http){
 }
 
 function setGeneralTotalYear($http){
+  if(typeof totalYearTimeout !=='undefined'){
+    window.clearInterval(totalYearInterval);
+    window.clearTimeout(totalYearTimeout);
+  }
   generalTotalYearCounter = new FlipClock($('.generalTotalYear'), 1000000000, {
     clockFace: 'Counter'
   });
@@ -35,8 +43,8 @@ function setGeneralTotalYear($http){
     generalTotalYearCounter.setValue(data.total);
   });
 
-  setTimeout(function() {
-    setInterval(function() {
+  totalYearTimeout = setTimeout(function() {
+    totalYearInterval = setInterval(function() {
       $http.get('../api/report/totalAllUsers/').success(function(data) {
         generalTotalYearCounter.setValue(data.total);
       });
@@ -45,6 +53,10 @@ function setGeneralTotalYear($http){
 }
 
 function setMonthTotal($http){
+  if(typeof MonthTotalTimeout !=='undefined'){
+    window.clearInterval(MonthTotalInterval);
+    window.clearTimeout(MonthTotalTimeout);
+  }
   monthCounter = new FlipClock($('.monthTotal'), 1000000000, {
     clockFace: 'Counter'
   });
@@ -52,8 +64,8 @@ function setMonthTotal($http){
     monthCounter.setValue(data.total);
   });
 
-  setTimeout(function() {
-    setInterval(function() {
+  MonthTotalTimeout = setTimeout(function() {
+    MonthTotalInterval = setInterval(function() {
       $http.get('../api/report/monthTotalAllUsers/').success(function(data) {
         monthCounter.setValue(data.total);
       });

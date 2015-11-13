@@ -14,6 +14,10 @@ app.controller('DashboardCtrl', function($scope, $http, $rootScope, $location, $
 });
 
 function setGeneralTotal($rootScope, $http, userCPF){
+  if(typeof generalTotalTimeout !=='undefined'){
+    window.clearInterval(generalTotalInterval);
+    window.clearTimeout(generalTotalTimeout);
+  }
   GeneralCounter = new FlipClock($('.generalTotal'), 1000000000, {
     clockFace: 'Counter'
   });
@@ -22,8 +26,8 @@ function setGeneralTotal($rootScope, $http, userCPF){
     $rootScope.lastUpdate = data.last_update;
   });
 
-  setTimeout(function() {
-    setInterval(function() {
+  generalTotalTimeout = setTimeout(function() {
+    generalTotalInterval = setInterval(function() {
       $http.get('../api/report/totalByUser/'+userCPF).success(function(data) {
         GeneralCounter.setValue(data.total);
         $rootScope.lastUpdate = data.last_update;
@@ -33,6 +37,10 @@ function setGeneralTotal($rootScope, $http, userCPF){
 }
 
 function setMonthTotal($http, userCPF){
+  if(typeof dashboardMonthTotalTimeout !=='undefined'){
+    window.clearInterval(dashboardMonthTotalInterval);
+    window.clearTimeout(dashboardMonthTotalTimeout);
+  }
   monthCounter = new FlipClock($('.monthTotal'), 1000000000, {
     clockFace: 'Counter'
   });
@@ -40,8 +48,8 @@ function setMonthTotal($http, userCPF){
     monthCounter.setValue(data.total);
   });
 
-  setTimeout(function() {
-    setInterval(function() {
+  dashboardMonthTotalTimeout = setTimeout(function() {
+    dashboardMonthTotalInterval = setInterval(function() {
       $http.get('../api/report/monthTotalByUser/'+userCPF).success(function(data) {
         monthCounter.setValue(data.total);
       });
