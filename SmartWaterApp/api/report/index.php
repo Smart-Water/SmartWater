@@ -6,6 +6,15 @@ include ("../../session/session.php");
 
 $app = new \Slim\Slim();
 
+$corsOptions = array(
+    "origin" => "*",
+    "exposeHeaders" => array("Content-Type", "X-Requested-With", "X-authentication", "X-client"),
+    "allowMethods" => array('GET', 'POST', 'PUT', 'DELETE', 'OPTIONS')
+);
+$cors = new \CorsSlim\CorsSlim($corsOptions);
+
+$app->add($cors);
+
 $app->get('/totalByUser/:cpf', function ($cpf)  {
   $sql = "SELECT max(water_flow) AS total, max(time_register) as last_update
   FROM history h JOIN boards b on b.mac_address = h.mac_address
